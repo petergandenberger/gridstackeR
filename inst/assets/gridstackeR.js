@@ -49,28 +49,12 @@ $(document).on('shiny:sessioninitialized', function(event) {
 });
 
 /*
-* function for adding and deleting gridstack items
+* function for loading a specific layout.
+* The given layout has to be a JSON array with each element containing the information about one
+* grid-stack-item.
+* - the id of the grid-stack-item
+* - the desired options (i.e. height, width, x-, y-Values)
 */
-function addGridStackItem(grid_stack_item) {
-  grid.addWidget({w: 2, content: grid_stack_item})
-}
-
-function deleteGridStackItem(item) {
-  grid.removeWidget(item.closest(".grid-stack-item"))
-}
-
-/*
-* function for loading and saving the grid
-*/
-function loadGrid(serializedGrid) {
-  if(serializedGrid == null) {
-    serializedGrid = serializedData;
-  } else {
-    serializedGrid = JSON.parse(String(serializedGrid).replace(/'/g, ''));
-  }
-  grid.load(serializedGrid, true);
-}
-
 function loadLayout(layout) {
   layout = JSON.parse(layout);
 
@@ -78,14 +62,4 @@ function loadLayout(layout) {
     item_layout = layout[i];
     grid.update(document.getElementById(item_layout["id"]).closest(".grid-stack-item"), item_layout["options"]);
   }
-}
-
-function changeGridStackItem(item) {
-  grid.update(document.getElementById("c_line").closest(".grid-stack-item"), (1, 1));
-}
-
-function saveGrid() {
-  serializedData = grid.save();
-  //TODO return does not work, this has to be done using the shiny callbacks
-  return JSON.stringify(serializedData, null, '  ');
 }

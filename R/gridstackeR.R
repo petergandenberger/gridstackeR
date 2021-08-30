@@ -31,12 +31,8 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
       paste0("initGridstackeR(", opts, ", ", ncols, ");")
     ),
     shinyjs::useShinyjs(),
-    shinyjs::extendShinyjs(functions = c("add_grid_stack_item", "load_grid_stack", "save_grid_stack", "load_grid_stack_layout"),
-      text = "shinyjs.add_grid_stack_item = function(grid_stack_item){addGridStackItem(grid_stack_item);}
-              shinyjs.delete_grid_stack_item = function(item){deleteGridStackItem(item);}
-              shinyjs.load_grid_stack = function(serializedData){loadGrid(serializedData);}
-              shinyjs.load_grid_stack_layout = function(layout){loadLayout(layout);}
-              shinyjs.save_grid_stack = function(){return saveGrid();}")
+    shinyjs::extendShinyjs(functions = c("load_grid_stack_layout"),
+      text = "shinyjs.load_grid_stack_layout = function(layout){loadLayout(layout);}")
   )
 }
 
@@ -65,8 +61,8 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
 #'
 #' @importFrom shiny div
 #' @export
-grid_stack_item <- function(..., id = '',
-                            autoPosition = '', x = '', y = '', w = '', h = '',
+grid_stack_item <- function(..., id = '', autoPosition = '',
+                            x = '', y = '', w = '', h = '',
                             maxW = '', minW = '', maxH = '', minH = '',
                             locked = '', noResize = '', noMove = '', resizeHandles = '') {
   div(
