@@ -1,11 +1,10 @@
 Package: gridstackeR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Wrapper for gridstack.js
 Version: 0.1.0
 Author@R: person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre")
 Maintainer: Peter Gandenberger <peter.gandenberger@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Acts as a wrapper to allow for easy integration of the gridstack.js functionalities.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
