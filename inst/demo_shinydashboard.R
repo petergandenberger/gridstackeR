@@ -24,7 +24,7 @@ ui <- dashboardPage(
         h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
         box(
           title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-          plotOutput("plot3", height = "auto")
+          plotOutput("plot", height = "auto")
         )
       ),
       grid_stack_item(
@@ -33,6 +33,10 @@ ui <- dashboardPage(
           title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
           sliderInput("slider", "Slider input:", 1, 100, 50)
         )
+      ),
+      grid_stack_item(
+        w = 4, h = 10, x = 0, y = 0, id =  "c_table",
+        DT::dataTableOutput("mytable")
       )
     )
   )
@@ -40,7 +44,7 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
 
-  output$plot3 <- renderPlot({
+  output$plot <- renderPlot({
     x    <- faithful$waiting
     bins <- seq(min(x), max(x), length.out = input$slider + 1)
 
@@ -52,6 +56,14 @@ server <- function(input, output, session) {
   # set the height according to the container height (minus the margins)
   height = function() {max(input$plot_container_height - 80, 150)}
   )
+
+  output$mytable <- DT::renderDataTable({
+    DT::datatable(mtcars, options = list(
+      # set the height according to the container height (minus the margins)
+      scrollY = max(input$c_table_height, 200) - 110, paging = FALSE
+      )
+    )
+  })
 }
 
 shinyApp(ui, server)
