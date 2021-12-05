@@ -25,6 +25,7 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
     ),
     div(
       class = "grid-stack",
+      id = "gridstackeR-grid",
       ...
     ),
     shiny::tags$script(

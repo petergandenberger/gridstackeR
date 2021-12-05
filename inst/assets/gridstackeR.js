@@ -33,6 +33,17 @@ function initGridstackeR(opts, ncols) {
       }
     }, 500);
   });
+
+  function resizedw(){
+    grid.cellHeight(window.innerHeight/12);
+    $(window).trigger('resize');
+  }
+
+  var doit;
+  $(window).on('resize', function(){
+      clearTimeout(doit);
+    doit = setTimeout(resizedw, 100);
+  });
 }
 
 /*
