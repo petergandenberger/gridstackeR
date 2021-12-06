@@ -35,7 +35,7 @@ function initGridstackeR(opts, ncols) {
   });
 
   function resizedw(){
-    grid.cellHeight(window.innerHeight/12);
+    grid.cellHeight((window.innerHeight*0.9)/12);
     $(window).trigger('resize');
   }
 
