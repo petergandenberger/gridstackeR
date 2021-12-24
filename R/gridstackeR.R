@@ -13,7 +13,8 @@
 #' @importFrom shiny div
 #'
 #' @export
-grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
+grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
+                       nrows = 12, height_dynamic = FALSE, height_offset = 0) {
   tagList(
     htmltools::htmlDependency(
       name = "gridstack",
@@ -29,7 +30,8 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12) {
       ...
     ),
     shiny::tags$script(
-      paste0("initGridstackeR(", opts, ", ", ncols, ");")
+      paste0("initGridstackeR(", opts, ", ", ncols, ", ", nrows, ", ",
+             ifelse(height_dynamic, "true", "false"), ", ", height_offset, ");")
     ),
     shinyjs::useShinyjs(),
     shinyjs::extendShinyjs(functions = c("load_grid_stack_layout"),

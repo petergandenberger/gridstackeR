@@ -13,6 +13,7 @@ ui <- dashboardPage(
     # make sure the content fills the given height
     tags$style(".grid-stack-item-content {height:100%;}"),
     grid_stack(
+      height_dynamic = TRUE,
       grid_stack_item(
         h = 2, w = 2, style = "overflow:hidden",
         box(

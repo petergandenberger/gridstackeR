@@ -4,7 +4,7 @@ var serializedData;
 /*
 * initializes the grid and adds the hooks for the height and width changes
 */
-function initGridstackeR(opts, ncols) {
+function initGridstackeR(opts, ncols, nrows, height_dynamic, height_offset) {
   grid = GridStack.init(opts);
   grid.column(ncols);
 
@@ -35,8 +35,10 @@ function initGridstackeR(opts, ncols) {
   });
 
   function resizedw(){
-    grid.cellHeight((window.innerHeight*0.9)/12);
-    $(window).trigger('resize');
+    if(height_dynamic) {
+      console.log("hi")
+      grid.cellHeight((window.innerHeight-height_offset)/nrows);
+    }
   }
 
   var doit;
