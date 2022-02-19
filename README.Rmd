@@ -2,6 +2,7 @@
 output: github_document
 ---
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
@@ -17,6 +18,7 @@ knitr::opts_chunk$set(
 # gridstackR
 The gridstackR package allows users to easily create Dashboards with [gridstack.js](https://gridstackjs.com/) functionalities 
 
+- COMMENT: Short explanation what is gridstack.js?
 
 <img src='man/figures/healthdown_example.gif'/>
 
@@ -29,49 +31,63 @@ devtools::install_github("petergandenberger/gridstackeR")
 ```
 
 ## Usage
+
+- COMMENT: A complete (little) example would help
+
 In the ```ui.R``` file, create a grid using ```grid_stack(...)``` and place grid-stack-items inside using ```grid_stack_item(...)```.
 
-Specify options like  height, width, x-, y-position aswell. Check the [gridstack.js documentation](https://github.com/gridstack/gridstack.js/tree/master/doc#item-options) for a full list of options.
+Specify options like height, width, x-, y-position as well. Check the [gridstack.js documentation](https://github.com/gridstack/gridstack.js/tree/master/doc#item-options) for a full list of options.
 
 The ```ui.R``` file might contain something like the following.
-``` r
+```{r}
 grid_stack(
   grid_stack_item(
-        h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
-        box(
-          title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-          plotOutput("plot", height = "auto")
-        )
-      )
+    h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+    box(
+      title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
+      plotOutput("plot", height = "auto")
+    )
+  )
+)
 ```
 
 ## Dynamic figure height
-Plots inside the ```grid-stack-items``` might not change their height themselves. 
+
+Elements inside ```grid-stack-item``` might not change their height automatically.
 
 ### Setting the height dynamically using callbacks
 The following example shows how the height of the plot can be set dynamically using the ```<id>_height``` callback
 
 Note: the ```plot_container_height``` references the height of the ```id = "plot_container"``` created in the ```ui.R``` example above.
-``` r
+
+
+```{r}
 output$plot <- renderPlot({
     x    <- faithful$waiting
     bins <- seq(min(x), max(x), length.out = input$slider + 1)
 
-    hist(x, breaks = bins, col = "#75AADB", border = "white",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
-
+    hist(
+      x, breaks = bins, col = "#75AADB", border = "white", 
+      xlab = "Waiting time to next eruption (in mins)", 
+      main = "Histogram of waiting times"
+    )
   },
   # set the height according to the container height (minus the margins)
+  # COMMENT: Is there a specific reason why it is 150?
+  # maybe assign clear variable names first? e.g.
+  # min_height <- 150
+  # margin <- 80
   height = function() {max(input$plot_container_height - 80, 150)}
-  )
+)
 ```
+
+
 
 ### Setting the height for [DT::dataTableOutput](https://rstudio.github.io/DT/)
 The height for a ```DT::dataTableOutput``` can be set as in the following example.
 
 ui.R
-``` r 
+``` {r}
 grid_stack_item(
         w = 4, h = 10, x = 0, y = 0, id =  "c_table",
         DT::dataTableOutput("mytable")
@@ -79,7 +95,7 @@ grid_stack_item(
 ``` 
 
 server.R
-``` r
+``` {r}
 output$mytable <- DT::renderDataTable({
     DT::datatable(mtcars, options = list(
       # set the height according to the container height (minus the margins)
@@ -93,9 +109,14 @@ output$mytable <- DT::renderDataTable({
 The height for a ```echarts4r::echarts4rOutput``` can easily be set using the ```height="100%"``` option.
 
 ui.R
-``` r 
+``` {r} 
 grid_stack_item(
-        w = 5, h = 5, x = 7, y = 0, id = "c_plot",
-        echarts4rOutput(outputId =  "plot", height = "100%")
-      )
+ w = 5, h = 5, x = 7, y = 0, id = "c_plot",
+ echarts4rOutput(outputId =  "plot", height = "100%")
+)
 ``` 
+
+
+
+
+

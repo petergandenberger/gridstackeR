@@ -7,7 +7,7 @@
 #' @param opts grid options: check
 #' \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
 #' for more details
-#' @param ncols: number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)
+#' @param ncols number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)
 #'
 #'
 #' @importFrom shiny div
@@ -47,9 +47,9 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
 #' for more information.
 #'
 #' @param ... content to include in the grid stack item
-#' @param id the id of the item, used for save and load functions, this param is propageted through to lower levels
+#' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels
 #' @param autoPosition tells to ignore x and y attributes and to place element to the first
-#' available position. Having either one missing will also do that
+#' available position. Having either one missing will also do that # COMMENT: What does this mean? Do I need to set it to TRUE or FALSE?
 #' @param x,y element position in column/row.
 #' Note: if one is missing this will \code{autoPosition} the item
 #' @param w,h element size in column/row
@@ -57,14 +57,20 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
 #' @param locked means another widget wouldn't be able to move it during dragging or resizing.
 #' The widget can still be dragged or resized by the user.
 #' You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.
-#' @param noResize disable element resizing
-#' @param noMove disable element moving
+#' @param noResize disable element resizing # COMMENT: What does this mean? Do I need to set it to TRUE or FALSE?
+#' @param noMove disable element moving # COMMENT: What does this mean? Do I need to set it to TRUE or FALSE?
 #' @param resizeHandles - widgets can have their own custom resize handles.
 #' For example 'e,w' will make that particular widget only resize east and west.
 #'
 #' @importFrom shiny div
 #' @export
+#'
+#' # COMMENT: In general it is a bit unclear what each argument means and how I would need to change the default value
+#' to do achieve something.
+#'
 grid_stack_item <- function(..., id = '', autoPosition = '',
+                            # COMMENT: I think it is clearer, when width and height are numeric, why do we have characters here?
+                            # which unit is assumed?
                             x = '', y = '', w = '', h = '',
                             maxW = '', minW = '', maxH = '', minH = '',
                             locked = '', noResize = '', noMove = '', resizeHandles = '') {
