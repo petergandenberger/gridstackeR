@@ -6,6 +6,10 @@
 The gridstackR package allows users to easily create Dashboards with
 [gridstack.js](https://gridstackjs.com/) functionalities
 
+‘gridstack.js is \[…\] designed to help developers create beautiful
+draggable, resizable, responsive \[…\] layouts with just a few lines of
+code’
+
 <img src='man/figures/healthdown_example.gif'/>
 
 ## Installation
@@ -18,12 +22,63 @@ You can install the development version from
 devtools::install_github("petergandenberger/gridstackeR")
 ```
 
+## Example
+
+In the example below we add gridstackR to the basic shiny application
+‘Old Faithful Geyser’. The plot can now be dynamically resized and the
+position for both, the plot and the slider, can be changed using simple
+drag&drop.
+
+``` r
+library(shiny)
+library(gridstackeR)
+ui <- fluidPage(
+  grid_stack(
+    grid_stack_item(
+      h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+      shinydashboard::box(
+        title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
+        plotOutput("plot", height = "auto")
+      )
+    ),
+    grid_stack_item(
+      h = 3, w = 4, minH = 3, maxH = 3, id = "slider", style = "overflow:hidden",
+      shinydashboard::box(
+        title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
+        sliderInput("slider", "Slider input:", 1, 100, 50)
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    x    <- faithful$waiting
+    bins <- seq(min(x), max(x), length.out = input$slider + 1)
+
+    hist(
+      x, breaks = bins, col = "#75AADB", border = "white", 
+      xlab = "Waiting time to next eruption (in mins)", 
+      main = "Histogram of waiting times"
+    )
+  },
+  # set the height according to the container height (minus the margins)
+  height = function() {
+    min_height <- 150
+    margin <- 80
+    max(input$plot_container_height - margin, min_height)
+  })
+}
+
+shinyApp(ui, server)
+```
+
 ## Usage
 
 In the `ui.R` file, create a grid using `grid_stack(...)` and place
 grid-stack-items inside using `grid_stack_item(...)`.
 
-Specify options like height, width, x-, y-position aswell. Check the
+Specify options like height, width, x-, y-position as well. Check the
 [gridstack.js
 documentation](https://github.com/gridstack/gridstack.js/tree/master/doc#item-options)
 for a full list of options.
@@ -33,18 +88,19 @@ The `ui.R` file might contain something like the following.
 ``` r
 grid_stack(
   grid_stack_item(
-        h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
-        box(
-          title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-          plotOutput("plot", height = "auto")
-        )
-      )
+    h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+    shinydashboard::box(
+      title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
+      plotOutput("plot", height = "auto")
+    )
+  )
+)
 ```
 
 ## Dynamic figure height
 
-Plots inside the `grid-stack-items` might not change their height
-themselves.
+Elements inside `grid-stack-item` might not change their height
+automatically.
 
 ### Setting the height dynamically using callbacks
 
@@ -59,14 +115,19 @@ output$plot <- renderPlot({
     x    <- faithful$waiting
     bins <- seq(min(x), max(x), length.out = input$slider + 1)
 
-    hist(x, breaks = bins, col = "#75AADB", border = "white",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
-
+    hist(
+      x, breaks = bins, col = "#75AADB", border = "white", 
+      xlab = "Waiting time to next eruption (in mins)", 
+      main = "Histogram of waiting times"
+    )
   },
   # set the height according to the container height (minus the margins)
-  height = function() {max(input$plot_container_height - 80, 150)}
-  )
+  height = function() {
+    min_height <- 150
+    margin <- 80
+    max(input$plot_container_height - margin, min_height)
+  }
+)
 ```
 
 ### Setting the height for [DT::dataTableOutput](https://rstudio.github.io/DT/)
@@ -104,7 +165,7 @@ ui.R
 
 ``` r
 grid_stack_item(
-        w = 5, h = 5, x = 7, y = 0, id = "c_plot",
-        echarts4rOutput(outputId =  "plot", height = "100%")
-      )
+ w = 5, h = 5, x = 7, y = 0, id = "c_plot",
+ echarts4rOutput(outputId =  "plot", height = "100%")
+)
 ```

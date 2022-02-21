@@ -1,10 +1,9 @@
 var grid;
-var serializedData;
 
 /*
 * initializes the grid and adds the hooks for the height and width changes
 */
-function initGridstackeR(opts, ncols, nrows, height_dynamic, height_offset) {
+function initGridstackeR(opts, ncols, nrows, dynamic_full_window_height, height_margin) {
   grid = GridStack.init(opts);
   grid.column(ncols);
 
@@ -35,16 +34,15 @@ function initGridstackeR(opts, ncols, nrows, height_dynamic, height_offset) {
   });
 
   function resizedw(){
-    if(height_dynamic) {
-      console.log("hi")
-      grid.cellHeight((window.innerHeight-height_offset)/nrows);
+    if(dynamic_full_window_height) {
+      grid.cellHeight((window.innerHeight-height_margin)/nrows);
     }
   }
 
-  var doit;
+  var resize_delayed;
   $(window).on('resize', function(){
-      clearTimeout(doit);
-    doit = setTimeout(resizedw, 100);
+      clearTimeout(resize_delayed);
+    resize_delayed = setTimeout(resizedw, 100);
   });
 }
 
