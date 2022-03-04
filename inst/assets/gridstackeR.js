@@ -67,10 +67,45 @@ $(document).on('shiny:sessioninitialized', function(event) {
 * - the desired options (i.e. height, width, x-, y-Values)
 */
 function loadLayout(layout) {
+  if(!isJSONArray(layout)) {
+    console.log("The given layout is not a json array");
+    return;
+  }
+
   layout = JSON.parse(layout);
 
   for(i in layout) {
     item_layout = layout[i];
-    grid.update(document.getElementById(item_layout["id"]).closest(".grid-stack-item"), item_layout["options"]);
+    if(!item_layout.hasOwnProperty('id')) {
+      console.log("Warning in loadLayout: Couldn't find property 'id' for element" + item_layout);
+      continue;
+    }
+    if(!item_layout.hasOwnProperty('options')) {
+      console.log("Warning in loadLayout: Couldn't find property 'options' for element" + item_layout);
+      continue;
+    }
+
+    element = document.getElementById(item_layout["id"])
+    if(element != null) {
+      gridStackItem = element.closest(".grid-stack-item")
+      if(gridStackItem != null) {
+        grid.update(gridStackItem, item_layout["options"]);
+      } else {
+        console.log("Error in loadLayout: Couldn't find grid-stack-item from element with id " + item_layout["id"])
+      }
+    } else {
+      console.log("Error in loadLayout: Couldn't find element with id " + item_layout["id"])
+    }
+  }
+}
+
+function isJSONArray(str) {
+  if (typeof str !== 'string' && typeof str !== 'object') return false;
+  try {
+      const result = JSON.parse(str);
+      const type = Object.prototype.toString.call(result);
+      return type === '[object Array]';
+  } catch (err) {
+      return false;
   }
 }
