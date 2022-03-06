@@ -10,6 +10,8 @@ The gridstackeR package allows users to easily create Dashboards with
 draggable, resizable, responsive \[…\] layouts with just a few lines of
 code’
 
+You can check out the example at https://pega.shinyapps.io/gridstackeR. It is based on the [healthdown app](https://github.com/hoga-it/leafdown).
+
 <img src='man/figures/healthdown_example.gif'/>
 
 ## Installation
