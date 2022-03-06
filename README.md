@@ -171,3 +171,28 @@ grid_stack_item(
  echarts4rOutput(outputId =  "plot", height = "100%")
 )
 ```
+
+## Loading predefined Layouts
+
+It is also possible to load predefined Layouts. This is demonstrated in the healthdown example above.
+
+ui.R
+
+- every element has to have a unique id
+- initialize shinyJS with 'useShinyjs()'
+
+server.R
+
+- call the function js$load_grid_stack_layout(layout) with the desired 'layout' as a json-array string
+- each element of this json-array needs
+  - the 'id' of the grid_stack_item
+  - the desired new options of this item
+  
+``` r
+# do this inside of e.g. an 'observeEvent' of an 'actionButton'
+new_layout <- '[
+    {"id": "c_plot", "options":{"x": 0,"y": 0,"w": 2, "h": 10}},
+    {"id": "c_map", "options":{"x": 2,"y": 0,"w": 5, "h": 5}}
+  ]'
+js$load_grid_stack_layout(new_layout)
+```
