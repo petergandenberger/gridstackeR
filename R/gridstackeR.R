@@ -10,19 +10,18 @@
 #' @param ncols number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)
 #' @param nrows number of rows for the grid
 #'
-#' @param dynamic_full_window_height if TRUE, the grid will change dynamically to fit the window size minus the \code{height_margin}
-#' @param height_margin margin for the grid height, see \code{dynamic_full_window_height}
+#' @param dynamic_full_window_height if TRUE, the grid will change dynamically to fit the window size minus the \code{height_offset}
+#' @param height_offset margin for the grid height, see \code{dynamic_full_window_height}
 #'
 #' @importFrom shiny div
 #'
 #' @export
 grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
                        nrows = 12, dynamic_full_window_height = FALSE, height_offset = 0) {
-  checkmate::check_integer(ncols)
-  checkmate::check_integer(nrows)
-
-  checkmate::check_logical(dynamic_full_window_height)
-  checkmate::check_numeric(height_offset)
+  assert_integerish(ncols, lower = 0, len = 1, any.missing = FALSE)
+  assert_integerish(nrows, lower = 0, len = 1, any.missing = FALSE)
+  assert_logical(dynamic_full_window_height)
+  assert_numeric(height_offset)
 
   tagList(
     htmltools::htmlDependency(
@@ -76,31 +75,29 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
 #' @importFrom shiny div
 #' @export
 #'
-grid_stack_item <- function(..., id = '', autoPosition = '',
-                            x = '', y = '', w = '', h = '',
-                            maxW = '', minW = '', maxH = '', minH = '',
-                            locked = '', noResize = '', noMove = '', resizeHandles = '') {
-  check_empty_string_or_(id, checkmate::assert_string)
-  check_empty_string_or_(resizeHandles, checkmate::assert_string)
-  check_empty_string_or_(autoPosition, checkmate::assert_logical)
-  check_empty_string_or_(locked, checkmate::assert_logical)
-  check_empty_string_or_(noResize, checkmate::assert_logical)
-  check_empty_string_or_(noMove, checkmate::assert_logical)
-  check_empty_string_or_(x, checkmate::assert_numeric)
-  check_empty_string_or_(y, checkmate::assert_numeric)
-  check_empty_string_or_(w, checkmate::assert_numeric)
-  check_empty_string_or_(h, checkmate::assert_numeric)
-  check_empty_string_or_(maxH, checkmate::assert_numeric)
-  check_empty_string_or_(maxW, checkmate::assert_numeric)
-  check_empty_string_or_(minH, checkmate::assert_numeric)
-  check_empty_string_or_(minW, checkmate::assert_numeric)
+grid_stack_item <- function(..., id = NULL, autoPosition = NULL,
+                            x = NULL, y = NULL, w = NULL, h = NULL,
+                            maxW = NULL, minW = NULL, maxH = NULL, minH = NULL,
+                            locked = NULL, noResize = NULL, noMove = NULL, resizeHandles = NULL) {
+
+  assert_string(id, null.ok = TRUE)
+  assert_string(resizeHandles, null.ok = TRUE)
+  sapply(c(autoPosition, locked, noResize, noMove), assert_logical, null.ok = TRUE)
+  sapply(c(x, y, w, h, maxH, maxW, minH, minW), assert_integerish, any.missing = FALSE, len = 1, null.ok = TRUE)
+  if (!(is.null(maxH) & is.null(minH))) assert_true(maxH >= minH)
+  if (!(is.null(maxW) & is.null(minW))) assert_true(maxW >= minW)
+
+  arg_list <- lapply(
+    list(id, resizeHandles, autoPosition, locked, noResize, noMove, x, y, w, h, maxH, maxW, minH, minW),
+    function(x) ifelse(is.null(x), '', x)
+  )
 
   div(
-    class = "grid-stack-item", 'gs-id' = id,
-    'gs-auto-position' = autoPosition, 'gs-w' = w, 'gs-h' = h, 'gs-x' = x, 'gs-y' = y,
-    'gs-max-w' = maxW, 'gs-min-w' = minW, 'gs-max-h' = maxH, 'gs-min-h' = minH,
-    'gs-locked' = locked, 'gs-no-resize' = noResize,
-    'gs-no-move' = noMove, 'gs-resize-handles' = resizeHandles,
+    class = "grid-stack-item", 'gs-id' = arg_list$id,
+    'gs-auto-position' = arg_list$autoPosition, 'gs-w' = arg_list$w, 'gs-h' = arg_list$h, 'gs-x' = arg_list$x,
+    'gs-y' = arg_list$y, 'gs-max-w' = arg_list$maxW, 'gs-min-w' = arg_list$minW, 'gs-max-h' = arg_list$maxH,
+    'gs-min-h' = arg_list$minH, 'gs-locked' = arg_list$locked, 'gs-no-resize' = arg_list$noResize,
+    'gs-no-move' = arg_list$noMove, 'gs-resize-handles' = arg_list$resizeHandles,
     div(
       class = "grid-stack-item-content",
       id = id,
@@ -108,3 +105,11 @@ grid_stack_item <- function(..., id = '', autoPosition = '',
     )
   )
 }
+
+
+
+
+
+
+
+
