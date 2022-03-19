@@ -44,7 +44,15 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
     ),
     shinyjs::useShinyjs(),
     shinyjs::extendShinyjs(functions = c("load_grid_stack_layout"),
-      text = "shinyjs.load_grid_stack_layout = function(layout){loadLayout(layout);}")
+                           text = "shinyjs.load_grid_stack_layout = function(layout){loadLayout(layout);}"),
+    shinyjs::extendShinyjs(functions = c("save_grid_stack_layout"),
+                           text = "shinyjs.save_grid_stack_layout = function(){saveLayout();}"),
+    shinyjs::extendShinyjs(functions = c("load_grid_stack_layout_simple"),
+                           text = "shinyjs.load_grid_stack_layout_simple = function(layout){loadLayoutSimple(layout);}"),
+    shinyjs::extendShinyjs(functions = c("add_grid_stack_element"),
+                           text = "shinyjs.add_grid_stack_element = function(element){addElement(element);}"),
+    shinyjs::extendShinyjs(functions = c("delete_grid_stack_element"),
+                           text = "shinyjs.delete_grid_stack_element = function(element){deleteElement(element);}")
   )
 }
 

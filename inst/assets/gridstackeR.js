@@ -71,8 +71,11 @@ function loadLayout(layout) {
     console.log("The given layout is not a json array");
     return;
   }
-
-  layout = JSON.parse(layout);
+  if(typeof str == 'string') {
+    layout = JSON.parse(layout);
+  } else {
+    layout = layout[0]
+  }
 
   for(i in layout) {
     item_layout = layout[i];
@@ -100,12 +103,42 @@ function loadLayout(layout) {
 }
 
 function isJSONArray(str) {
+  console.log(str);
   if (typeof str !== 'string' && typeof str !== 'object') return false;
   try {
-      const result = JSON.parse(str);
-      const type = Object.prototype.toString.call(result);
-      return type === '[object Array]';
+    if(typeof str == 'string') {
+      obj = JSON.parse(str);
+    } else {
+      obj = str;
+    }
+    const type = Object.prototype.toString.call(obj);
+    return type === '[object Array]';
   } catch (err) {
       return false;
   }
+}
+
+
+function saveLayout() {
+  layout = grid.save(saveContent = false);
+  Shiny.setInputValue('saved_layout', JSON.stringify(layout), {priority: 'event'});
+}
+
+function loadLayoutSimple(layout) {
+  grid.removeAll({detachNode:false})
+  grid.load(layout[0]);
+}
+
+
+/**
+ * add and delete elements
+**/
+
+function addElement(element) {
+  el = JSON.parse(element);
+  grid.addWidget(el);
+}
+
+function deleteElement(element) {
+  grid.addWidget({w:2, content: 'item1'});
 }
