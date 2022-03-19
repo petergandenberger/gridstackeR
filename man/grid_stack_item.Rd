@@ -6,31 +6,34 @@
 \usage{
 grid_stack_item(
   ...,
-  autoPosition = "",
-  x = "",
-  y = "",
-  w = "",
-  h = "",
-  maxW = "",
-  minW = "",
-  maxH = "",
-  minH = "",
-  locked = "",
-  noResize = "",
-  noMove = "",
-  resizeHandles = ""
+  id = NULL,
+  autoPosition = NULL,
+  x = NULL,
+  y = NULL,
+  w = NULL,
+  h = NULL,
+  maxW = NULL,
+  minW = NULL,
+  maxH = NULL,
+  minH = NULL,
+  locked = NULL,
+  noResize = NULL,
+  noMove = NULL,
+  resizeHandles = NULL
 )
 }
 \arguments{
 \item{...}{content to include in the grid stack item}
 
-\item{autoPosition}{tells to ignore x and y attributes and to place element to the first
-available position. Having either one missing will also do that}
+\item{id}{the id of the item, used for save and load functions, this param is propagated through to lower levels}
 
-\item{x, y}{element position in column/row.
+\item{autoPosition}{if set to TRUE x and y attributes are ignored and the element is placed to the first
+available position. Having either x or y missing will also do that}
+
+\item{x, y}{element position in columns/rows.
 Note: if one is missing this will \code{autoPosition} the item}
 
-\item{w, h}{element size in column/row}
+\item{w, h}{element size in columns/rows}
 
 \item{maxW, minW, maxH, minH}{element constraints in column/row (default none)}
 
@@ -38,9 +41,9 @@ Note: if one is missing this will \code{autoPosition} the item}
 The widget can still be dragged or resized by the user.
 You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.}
 
-\item{noResize}{disable element resizing}
+\item{noResize}{if set to TRUE it disables element resizing}
 
-\item{noMove}{disable element moving}
+\item{noMove}{if set to TRUE it disables element moving}
 
 \item{resizeHandles}{- widgets can have their own custom resize handles.
 For example 'e,w' will make that particular widget only resize east and west.}
@@ -49,4 +52,6 @@ For example 'e,w' will make that particular widget only resize east and west.}
 This is a wrapper for the individual items to be displayed in the \link{grid_stack}
 Check the \href{https://github.com/gridstack/gridstack.js/tree/master/doc#item-options}{ gridstack documentation}
 for more information.
+
+The default for all parameters is an empty string, this will make them disappear for gridstackjs
 }

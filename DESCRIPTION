@@ -2,14 +2,21 @@ Package: gridstackeR
 Type: Package
 Title: Wrapper for gridstack.js
 Version: 0.1.0
-Author@R: person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre")
+Authors@R: c(
+    person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre"),
+    person("Andreas", "Hofheinz", email = "andreas.hofheinz@outlook.com", role = "aut")
+    )
 Maintainer: Peter Gandenberger <peter.gandenberger@gmail.com>
-Description: Acts as a wrapper to allow for easy integration of the gridstack.js functionalities.
+Description: Serves as a wrapper to allow for easy integration of the gridstack.js functionalities.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+Depends: R (>= 3.5.0)
 Imports: 
-    htmltools,
-    shiny,
-    shinyjs
+  htmltools,
+  shiny,
+  shinyjs,
+  checkmate
+Suggests:
+  shinydashboard

@@ -4,7 +4,14 @@
 \alias{grid_stack}
 \title{Grid Stack Container}
 \usage{
-grid_stack(..., opts = "{cellHeight: 70}", ncols = 12)
+grid_stack(
+  ...,
+  opts = "{cellHeight: 70}",
+  ncols = 12,
+  nrows = 12,
+  dynamic_full_window_height = FALSE,
+  height_offset = 0
+)
 }
 \arguments{
 \item{...}{content to include in the container}
@@ -13,7 +20,13 @@ grid_stack(..., opts = "{cellHeight: 70}", ncols = 12)
 \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
 for more details}
 
-\item{ncols:}{number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)}
+\item{ncols}{number of columns for the grid (If you need > 12 columns you need to generate the CSS manually)}
+
+\item{nrows}{number of rows for the grid}
+
+\item{dynamic_full_window_height}{if TRUE, the grid will change dynamically to fit the window size minus the \code{height_offset}}
+
+\item{height_offset}{margin for the grid height, see \code{dynamic_full_window_height}}
 }
 \description{
 This acts as a container for the \link{grid_stack_item}'s.
