@@ -29,7 +29,7 @@ ui <- dashboardPage(
         )
       ),
       grid_stack_item(
-        h = 3, w = 4, minH = 2, maxH = 2, id = "slider", style = "overflow:hidden",
+        h = 3, w = 4, minH = 3, maxH = 3, id = "slider", style = "overflow:hidden",
         box(
           title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
           sliderInput("slider", "Slider input:", 1, 100, 50)
