@@ -20,8 +20,8 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
                        nrows = 12, dynamic_full_window_height = FALSE, height_offset = 0) {
   assert_integerish(ncols, lower = 0, len = 1, any.missing = FALSE)
   assert_integerish(nrows, lower = 0, len = 1, any.missing = FALSE)
-  assert_logical(dynamic_full_window_height)
-  assert_numeric(height_offset)
+  assert_flag(dynamic_full_window_height)
+  assert_numeric(height_offset, len = 1, any.missing = FALSE)
 
   tagList(
     htmltools::htmlDependency(
@@ -88,8 +88,12 @@ grid_stack_item <- function(..., id = NULL, autoPosition = NULL,
   if (!(is.null(maxW) & is.null(minW))) assert_true(maxW >= minW)
 
   arg_list <- lapply(
-    list(id, resizeHandles, autoPosition, locked, noResize, noMove, x, y, w, h, maxH, maxW, minH, minW),
-    function(x) ifelse(is.null(x), '', x)
+    list(
+      "id" = id, "resizeHandles" = resizeHandles, "autoPosition" = autoPosition, "locked" = locked,
+      "noResize" = noResize, "noMove" = noMove, "x" = x, "y" = y, "w" = w, "h" = h, "maxH" = maxH, "maxW" = maxW,
+      "minH" = minH, "minW" = minW
+    ),
+    function(x) ifelse(is.null(x), '', as.character(x))
   )
 
   div(
