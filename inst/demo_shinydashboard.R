@@ -22,7 +22,7 @@ ui <- dashboardPage(
         )
       ),
       grid_stack_item(
-        h = 4, w = 4, style = "overflow:hidden",
+        h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
         box(
           title = "Histogram", status = "primary", solidHeader = TRUE, width = 12, height = "100%",
           plotOutput("plot", height = "auto")
