@@ -19,4 +19,8 @@ Imports:
   shinyjs,
   checkmate
 Suggests:
-  shinydashboard
+    rmarkdown,
+    knitr,
+    shinydashboard
+URL: https://petergandenberger.github.io/gridstackeR
+VignetteBuilder: knitr
