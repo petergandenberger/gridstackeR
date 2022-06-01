@@ -11,10 +11,6 @@ library(shinyWidgets)
 library(readr)
 library(gridstackeR)
 
-# Run before uploading
-#devtools::install_github("hoga-it/leafdown")
-#devtools::install_github("petergandenberger/gridstackeR")
-
 # resources -----------------------------------------------------------------
 source("ui.R")
 source("server.R")
