@@ -67,14 +67,11 @@ $(document).on('shiny:sessioninitialized', function(event) {
 * - the desired options (i.e. height, width, x-, y-Values)
 */
 function loadLayout(layout) {
-  if(!isJSONArray(layout)) {
-    console.log("The given layout is not a json array");
-    return;
-  }
-  if(typeof str == 'string') {
+  try {
     layout = JSON.parse(layout);
-  } else {
-    layout = layout[0]
+  } catch (err) {
+    console.log("The given layout is not a valid json array");
+    return false;
   }
 
   for(i in layout) {
@@ -101,23 +98,6 @@ function loadLayout(layout) {
     }
   }
 }
-
-function isJSONArray(str) {
-  console.log(str);
-  if (typeof str !== 'string' && typeof str !== 'object') return false;
-  try {
-    if(typeof str == 'string') {
-      obj = JSON.parse(str);
-    } else {
-      obj = str;
-    }
-    const type = Object.prototype.toString.call(obj);
-    return type === '[object Array]';
-  } catch (err) {
-      return false;
-  }
-}
-
 
 function saveLayout() {
   layout = grid.save(saveContent = false);
