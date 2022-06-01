@@ -131,14 +131,10 @@ function loadLayoutSimple(layout) {
 
 
 /**
- * add and delete elements
+ * add elements
 **/
 
 function addElement(element) {
   el = JSON.parse(element);
   grid.addWidget(el);
-}
-
-function deleteElement(element) {
-  grid.addWidget({w:2, content: 'item1'});
 }
