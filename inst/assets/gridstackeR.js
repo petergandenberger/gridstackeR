@@ -104,6 +104,11 @@ function saveLayout() {
   Shiny.setInputValue('saved_layout', JSON.stringify(layout), {priority: 'event'});
 }
 
+function saveLayout_ns(ns) {
+  layout = grid.save(saveContent = false);
+  Shiny.setInputValue(ns + 'saved_layout', JSON.stringify(layout), {priority: 'event'});
+}
+
 function loadLayoutSimple(layout) {
   grid.removeAll({detachNode:false})
   grid.load(layout[0]);
