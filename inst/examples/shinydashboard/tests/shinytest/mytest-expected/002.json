@@ -1,0 +1,17 @@
+{
+  "input": {
+    "sidebarCollapsed": true,
+    "sidebarItemExpanded": null,
+    "slider": 50
+  },
+  "output": {
+    "plot": {
+      "message": "figure margins too large",
+      "call": "plot.new()",
+      "type": null
+    }
+  },
+  "export": {
+
+  }
+}

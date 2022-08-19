@@ -4,6 +4,7 @@
 #' This acts as a container for the \link{grid_stack_item}'s.
 #'
 #' @param ... content to include in the container
+#' @param id the id of the grid_stack container
 #' @param opts grid options: check
 #' \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
 #' for more details
@@ -16,12 +17,13 @@
 #' @importFrom shiny div
 #'
 #' @export
-grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
+grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", ncols = 12,
                        nrows = 12, dynamic_full_window_height = FALSE, height_offset = 0) {
   assert_integerish(ncols, lower = 0, len = 1, any.missing = FALSE)
   assert_integerish(nrows, lower = 0, len = 1, any.missing = FALSE)
   assert_flag(dynamic_full_window_height)
   assert_numeric(height_offset, len = 1, any.missing = FALSE)
+  assert_string(id)
 
   tagList(
     htmltools::htmlDependency(
@@ -34,11 +36,11 @@ grid_stack <- function(..., opts = "{cellHeight: 70}", ncols = 12,
     ),
     div(
       class = "grid-stack",
-      id = "gridstackeR-grid",
+      id = id,
       ...
     ),
     shiny::tags$script(
-      paste0("initGridstackeR(", opts, ", ", ncols, ", ", nrows, ", ",
+      paste0("initGridstackeR(", opts, ", '", id, "', ", ncols, ", ", nrows, ", ",
              ifelse(dynamic_full_window_height, "true", "false"), ", ", height_offset, ");")
     ),
     shinyjs::useShinyjs(),

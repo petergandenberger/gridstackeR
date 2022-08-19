@@ -1,10 +1,10 @@
-var grid;
+var grids = [];
 
 /*
 * initializes the grid and adds the hooks for the height and width changes
 */
-function initGridstackeR(opts, ncols, nrows, dynamic_full_window_height, height_margin) {
-  grid = GridStack.init(opts);
+function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, height_margin) {
+  let grid = GridStack.init(opts, elOrString = '#'+id);
   grid.column(ncols);
 
   /*
@@ -44,6 +44,8 @@ function initGridstackeR(opts, ncols, nrows, dynamic_full_window_height, height_
       clearTimeout(resize_delayed);
     resize_delayed = setTimeout(resizedw, 100);
   });
+
+  grids.push(grid);
 }
 
 /*
