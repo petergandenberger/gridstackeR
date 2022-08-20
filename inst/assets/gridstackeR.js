@@ -101,43 +101,26 @@ function loadLayout(layout) {
   }
 }
 
-function saveLayout(id) {
-  layout = grids[id].save(saveContent = false);
+function saveLayout() {
+  layout = grids[0].save(saveContent = false);
   Shiny.setInputValue('saved_layout', JSON.stringify(layout), {priority: 'event'});
 }
 
-function saveLayout() {
-  saveLayout(0);
-}
-
-function saveLayout_ns(ns, id) {
-  layout = grids[id].save(saveContent = false);
+function saveLayout_ns(ns) {
+  layout = grids[0].save(saveContent = false);
   Shiny.setInputValue(ns + 'saved_layout', JSON.stringify(layout), {priority: 'event'});
 }
 
-function saveLayout_ns(ns) {
-  saveLayout_ns(ns, 0);
-}
-
-function loadLayoutSimple(layout, id) {
-  grids[id].removeAll({detachNode:false})
-  grids[id].load(layout[0]);
-}
-
 function loadLayoutSimple(layout) {
-  loadLayoutSimple(layout, 0);
+  grids[0].removeAll({detachNode:false})
+  grids[0].load(layout[0]);
 }
-
 
 /**
  * add elements
 **/
 
-function addElement(element, id) {
-  el = JSON.parse(element);
-  grids[id].addWidget(el);
-}
-
 function addElement(element) {
-  addElement(element, 0);
+  el = JSON.parse(element);
+  grids[0].addWidget(el);
 }
