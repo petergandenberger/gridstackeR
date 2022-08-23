@@ -194,5 +194,5 @@ new_layout <- '[
     {"id": "c_plot", "options":{"x": 0,"y": 0,"w": 2, "h": 10}},
     {"id": "c_map", "options":{"x": 2,"y": 0,"w": 5, "h": 5}}
   ]'
-js$load_grid_stack_layout(new_layout)
+js$load_grid_layout(new_layout)
 ```
