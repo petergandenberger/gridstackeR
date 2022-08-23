@@ -19,4 +19,7 @@ Imports:
   shinyjs,
   checkmate
 Suggests:
-  shinydashboard
+    shinydashboard,
+    shinytest2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

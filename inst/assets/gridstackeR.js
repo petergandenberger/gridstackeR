@@ -4,11 +4,15 @@ var grids = [];
 * initializes the grid and adds the hooks for the height and width changes
 */
 function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, height_margin) {
-  let grid = GridStack.init(opts, elOrString = '#'+id);
+  /**
+   * create the grid
+   **/
+  var grid = GridStack.init(opts, elOrString = '#'+id);
   grid.column(ncols);
+  grids.push(grid);
 
   /*
-  * fires the height callbacks after resize stopped
+  * create callbacks to shiny when a grid-stack-item's size has changed
   */
   grid.on('resizestop', function(event, el) {
     $(window).trigger('resize');
@@ -19,7 +23,7 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
     }
   });
 
-  grid.on('change', (event, items) => {
+  grid.on('change', function(event, items) {
     $(window).trigger('resize');
     setTimeout(function (){
       for(i in items) {
@@ -33,6 +37,9 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
     }, 500);
   });
 
+  /*
+  * resize the grid-stack after the browser window resized
+  */
   function resizedw(){
     if(dynamic_full_window_height) {
       grid.cellHeight((window.innerHeight-height_margin)/nrows);
@@ -44,8 +51,6 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
       clearTimeout(resize_delayed);
     resize_delayed = setTimeout(resizedw, 100);
   });
-
-  grids.push(grid);
 }
 
 /*
@@ -68,8 +73,14 @@ $(document).on('shiny:sessioninitialized', function(event) {
 * - the id of the grid-stack-item
 * - the desired options (i.e. height, width, x-, y-Values)
 */
-function loadLayout(layout) {
+function load_grid_layout(grid_id, layout) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+    return(null);
+  }
   try {
+    console.log(layout);
     layout = JSON.parse(layout);
   } catch (err) {
     console.log("The given layout is not a valid json array");
@@ -101,26 +112,75 @@ function loadLayout(layout) {
   }
 }
 
-function saveLayout() {
-  layout = grids[0].save(saveContent = false);
-  Shiny.setInputValue('saved_layout', JSON.stringify(layout), {priority: 'event'});
+/*
+* similar to the saveLayout function but gives the option to give an ns prefix
+*/
+function save_grid_layout(grid_id, ns) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+    Shiny.setInputValue(ns + grid_id + '_saved_layout', null, {priority: 'event'});
+  } else {
+    layout = grid.save(saveContent = false);
+    layout.forEach(function(el) {
+      if (el.hasOwnProperty('subGrid')) {
+          el.subGrid = true;
+      }
+    });
+    Shiny.setInputValue(ns + grid_id + '_saved_layout', JSON.stringify(layout), {priority: 'event'});
+  }
 }
 
-function saveLayout_ns(ns) {
-  layout = grids[0].save(saveContent = false);
-  Shiny.setInputValue(ns + 'saved_layout', JSON.stringify(layout), {priority: 'event'});
-}
-
-function loadLayoutSimple(layout) {
-  grids[0].removeAll({detachNode:false})
-  grids[0].load(layout[0]);
+/*
+* loads the given grid.
+*/
+function load_grid(grid_id, new_grid) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+  } else {
+    grid.removeAll({detachNode:false})
+    grid.load(new_grid[0]);
+  }
 }
 
 /**
  * add elements
 **/
+function add_grid_element(grid_id, element) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+  } else {
+    el = JSON.parse(element);
+    grid.addWidget(el);
+  }
+}
 
-function addElement(element) {
-  el = JSON.parse(element);
-  grids[0].addWidget(el);
+/**
+ * add elements
+**/
+function remove_grid(grid_id) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+  } else {
+    const index = grids.indexOf(grid);
+    if (index > -1) {
+      grids.splice(index, 1);
+    }
+  }
+}
+
+/**
+ * find the grid with the given grid_id
+**/
+function helper_find_grid_by_id(grid_id) {
+  var grid = null;
+  grids.forEach(function (element) {
+    if(element.el.id==grid_id) {
+      grid = element;
+    }
+  })
+  return(grid)
 }

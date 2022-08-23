@@ -43,17 +43,13 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
       paste0("initGridstackeR(", opts, ", '", id, "', ", ncols, ", ", nrows, ", ",
              ifelse(dynamic_full_window_height, "true", "false"), ", ", height_offset, ");")
     ),
+
     shinyjs::useShinyjs(),
-    shinyjs::extendShinyjs(functions = c("load_grid_stack_layout"),
-                           text = "shinyjs.load_grid_stack_layout = function(layout){loadLayout(layout);}"),
-    shinyjs::extendShinyjs(functions = c("save_grid_stack_layout"),
-                           text = "shinyjs.save_grid_stack_layout = function(){saveLayout();}"),
-    shinyjs::extendShinyjs(functions = c("save_grid_stack_layout_ns"),
-                           text = "shinyjs.save_grid_stack_layout_ns = function(ns){saveLayout_ns(ns);}"),
-    shinyjs::extendShinyjs(functions = c("load_grid_stack_layout_simple"),
-                           text = "shinyjs.load_grid_stack_layout_simple = function(layout){loadLayoutSimple(layout);}"),
-    shinyjs::extendShinyjs(functions = c("add_grid_stack_element"),
-                           text = "shinyjs.add_grid_stack_element = function(element){addElement(element);}")
+    shinyjs::extendShinyjs(functions = c("load_grid_layout"), text = js_load_grid_layout()),
+    shinyjs::extendShinyjs(functions = c("save_grid_layout"), text = js_save_grid_layout()),
+    shinyjs::extendShinyjs(functions = c("add_grid_element"), text = js_add_grid_element()),
+    shinyjs::extendShinyjs(functions = c("load_grid"), text = js_load_grid()),
+    shinyjs::extendShinyjs(functions = c("remove_grid"), text = js_remove_grid())
   )
 }
 

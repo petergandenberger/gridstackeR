@@ -44,6 +44,7 @@ ui <- function() {
     # ---- second row
     grid_stack(
       dynamic_full_window_height = TRUE,
+      id = "grid_stack",
       grid_stack_item(
         w = 2, h = 10, x = 0, y = 0, id =  "c_table",
         DT::dataTableOutput("mytable")

@@ -5,15 +5,15 @@ server <- function(input, output, session) {
   rv$update_leafdown <- 0
 
   observeEvent(input$view_map, {
-    js$load_grid_stack_layout(view_map())
+    js$load_grid_layout("grid_stack", view_map())
   })
 
   observeEvent(input$view_full, {
-    js$load_grid_stack_layout(view_full())
+    js$load_grid_layout("grid_stack", view_full())
   })
 
   observeEvent(input$view_overview, {
-    js$load_grid_stack_layout(view_overview())
+    js$load_grid_layout("grid_stack", view_overview())
   })
 
   observeEvent(input$drill_down, {

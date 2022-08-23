@@ -12,7 +12,7 @@ ui <- dashboardPage(
     useShinyjs(),
     # make sure the content fills the given height
     tags$style(".grid-stack-item-content {height:100%;}"),
-    tags$style(".grid-stack {background: blue; width: 50%; float:left;}"),
+    tags$style(".grid-stack {background: gray; width: 45%; float:left;}"),
 
     grid_stack(
       id = "grid_stack_1",
