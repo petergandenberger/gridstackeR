@@ -4,14 +4,15 @@ Title: Wrapper for gridstack.js
 Version: 0.1.0
 Authors@R: c(
     person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre"),
-    person("Andreas", "Hofheinz", email = "andreas.hofheinz@outlook.com", role = "aut")
+    person("Andreas", "Hofheinz", email = "andreas.hofheinz@outlook.com", role = "aut"),
+    person("Alain", "Dumesny", role = "cph", comment = "Author of gridstack.js library")
     )
 Maintainer: Peter Gandenberger <peter.gandenberger@gmail.com>
 Description: Serves as a wrapper to allow for easy integration of the gridstack.js functionalities.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Depends: R (>= 3.5.0)
 Imports: 
   htmltools,
@@ -20,6 +21,4 @@ Imports:
   checkmate
 Suggests:
     shinydashboard,
-    shinytest2,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    shinytest2

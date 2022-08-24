@@ -1,0 +1,5 @@
+The gridstackeR package as a whole is distributed under GPL-3. The gridstackeR package includes other open source software components. The following is a list of these components:
+
+* gridstackjs: MIT
+
+Full copies of the license agreements used by these components are included in `inst/assets/gridstackjs`.

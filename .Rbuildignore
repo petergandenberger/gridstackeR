@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 _\.new\.png$
+^README.Rmd
+^cran-comments.md
+^CODE_OF_CONDUCT.md

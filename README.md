@@ -1,16 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gridstackeR
+# gridstackR
 
-The gridstackeR package allows users to easily create Dashboards with
+The gridstackR package allows users to easily create Dashboards with
 [gridstack.js](https://gridstackjs.com/) functionalities
 
 ‘gridstack.js is \[…\] designed to help developers create beautiful
 draggable, resizable, responsive \[…\] layouts with just a few lines of
 code’
-
-You can check out the example at https://pega.shinyapps.io/gridstackeR. It is based on the [healthdown app](https://github.com/hoga-it/leafdown).
 
 <img src='man/figures/healthdown_example.gif'/>
 
@@ -26,7 +24,7 @@ devtools::install_github("petergandenberger/gridstackeR")
 
 ## Example
 
-In the example below we add gridstackeR to the basic shiny application
+In the example below we add gridstackR to the basic shiny application
 ‘Old Faithful Geyser’. The plot can now be dynamically resized and the
 position for both, the plot and the slider, can be changed using simple
 drag&drop.
@@ -170,29 +168,4 @@ grid_stack_item(
  w = 5, h = 5, x = 7, y = 0, id = "c_plot",
  echarts4rOutput(outputId =  "plot", height = "100%")
 )
-```
-
-## Loading predefined Layouts
-
-It is also possible to load predefined Layouts. This is demonstrated in the healthdown example above.
-
-ui.R
-
-- every element has to have a unique id
-- initialize shinyJS with 'useShinyjs()'
-
-server.R
-
-- call the function js$load_grid_stack_layout(layout) with the desired 'layout' as a json-array string
-- each element of this json-array needs
-  - the 'id' of the grid_stack_item
-  - the desired new options of this item
-  
-``` r
-# do this inside of e.g. an 'observeEvent' of an 'actionButton'
-new_layout <- '[
-    {"id": "c_plot", "options":{"x": 0,"y": 0,"w": 2, "h": 10}},
-    {"id": "c_map", "options":{"x": 2,"y": 0,"w": 5, "h": 5}}
-  ]'
-js$load_grid_stack_layout(new_layout)
 ```

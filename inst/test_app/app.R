@@ -19,10 +19,12 @@ ui <- dashboardPage(
            actionButton("load_grid_layout", "Load Layout"),
            actionButton("add_grid", "Add Grid"),
            actionButton("add_grid_element_nested", "Add Element to nested grid"),
+           actionButton("save_grid_layout_nested", "Save nested Layout"),
            actionButton("remove_grid", "Remove Grid"),
 
            textOutput("result"),
-           textOutput("result_ns")
+           textOutput("result_ns"),
+           textOutput("result_nested")
     ),
     column(width = 10,
            grid_stack(
@@ -126,10 +128,20 @@ server <- function(input, output, session) {
     )
   })
 
+  # save_grid_layout_nested ###########################################################
+  observeEvent(input$save_grid_layout_nested, {
+    shinyjs::js$save_grid_layout(grid_id = "grid_stack_new")
+  })
+
+  output$result_nested <- renderText({
+    req(input$grid_stack_new_saved_layout)
+    input$grid_stack_new_saved_layout
+  })
+
   # remove_grid ###########################################################
   observeEvent(input$remove_grid, {
     shinyjs::js$remove_grid(grid_id = "grid_stack_new")
   })
 }
 
-shinyApp(ui, server)
+shinyApp(ui, server, options = options(shiny.autoload.r=FALSE))

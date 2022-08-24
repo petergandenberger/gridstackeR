@@ -1,0 +1,5 @@
+{
+  "output": {
+    "result_nested": "[{\"w\":3,\"h\":3,\"id\":\"el_id_element_nested1\",\"x\":0,\"y\":0},{\"w\":3,\"h\":3,\"id\":\"el_id_element_nested2\",\"x\":3,\"y\":0}]"
+  }
+}
