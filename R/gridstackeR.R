@@ -13,12 +13,12 @@
 #'
 #' @param dynamic_full_window_height if TRUE, the grid will change dynamically to fit the window size minus the \code{height_offset}
 #' @param height_offset margin for the grid height, see \code{dynamic_full_window_height}
+#' @return a grid_stack that can contain resizable and draggable \code{grid_stack_item}s
 #'
 #' @importFrom shiny div
 #'
 #' @examples
 #' \dontrun{
-#'
 #' library(gridstackeR)
 #' library(shiny)
 #' library(shinydashboard)
@@ -157,6 +157,23 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
 #' @param resizeHandles - widgets can have their own custom resize handles.
 #' For example 'e,w' will make that particular widget only resize east and west.
 #'
+#' @return a grid_stack_item to be placed inside a \code{grid_stack}. This item is resizable and draggable by default.
+#'
+#' @examples
+#' \dontrun{
+#' grid_stack_item(
+#' h = 2, w = 2, style = "overflow:hidden",
+#' box(
+#'   title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
+#'   div("Drag and scale the Boxes as desired")
+#' )
+#' )
+#' }
+#'
+
+
+
+
 #' @importFrom shiny div
 #' @export
 #'

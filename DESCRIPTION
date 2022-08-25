@@ -1,6 +1,6 @@
 Package: gridstackeR
 Type: Package
-Title: Wrapper for gridstack.js
+Title: Wrapper for 'gridstack.js'
 Version: 0.1.0
 Authors@R: c(
     person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre"),
@@ -8,8 +8,8 @@ Authors@R: c(
     person("Alain", "Dumesny", role = "cph", comment = "Author of gridstack.js library")
     )
 Maintainer: Peter Gandenberger <peter.gandenberger@gmail.com>
-Description: Serves as a wrapper to allow for easy integration of the gridstack.js functionalities.
-License: GPL-3 | file LICENSE
+Description: An easy way to create responsive layouts with just a few lines of code. You can create boxes that are draggable and resizable and load predefined Layouts. The package serves as a wrapper to allow for easy integration of the 'gridstack.js' functionalities <https://github.com/gridstack/gridstack.js>. 
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1

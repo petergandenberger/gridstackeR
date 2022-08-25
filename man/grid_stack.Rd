@@ -31,12 +31,14 @@ for more details}
 
 \item{height_offset}{margin for the grid height, see \code{dynamic_full_window_height}}
 }
+\value{
+a grid_stack that can contain resizable and draggable \code{grid_stack_item}s
+}
 \description{
 This acts as a container for the \link{grid_stack_item}'s.
 }
 \examples{
 \dontrun{
-
 library(gridstackeR)
 library(shiny)
 library(shinydashboard)

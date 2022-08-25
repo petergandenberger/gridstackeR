@@ -6,6 +6,16 @@
 \usage{
 gridstackeR_demo()
 }
+\value{
+an example shiny shinyApp that uses the gridstackeR package to create
+a responsive layout with resizable and draggable boxes.
+}
 \description{
-an short example of gridstackeR
+a short example of gridstackeR
+}
+\examples{
+\dontrun{
+gridstackeR_demo()
+}
+
 }

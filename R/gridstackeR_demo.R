@@ -1,7 +1,13 @@
 #' Demo
 #'
-#' @description
-#' an short example of gridstackeR
+#' @description a short example of gridstackeR
+#' @return an example shiny shinyApp that uses the gridstackeR package to create
+#' a responsive layout with resizable and draggable boxes.
+#'
+#' @examples
+#' \dontrun{
+#' gridstackeR_demo()
+#' }
 #'
 #' @export
 gridstackeR_demo <- function() {

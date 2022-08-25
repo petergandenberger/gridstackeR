@@ -48,10 +48,25 @@ You need to add \code{noResize} and \code{noMove} attributes to completely lock 
 \item{resizeHandles}{- widgets can have their own custom resize handles.
 For example 'e,w' will make that particular widget only resize east and west.}
 }
+\value{
+a grid_stack_item to be placed inside a \code{grid_stack}. This item is resizable and draggable by default.
+}
 \description{
 This is a wrapper for the individual items to be displayed in the \link{grid_stack}
 Check the \href{https://github.com/gridstack/gridstack.js/tree/master/doc#item-options}{ gridstack documentation}
 for more information.
 
 The default for all parameters is an empty string, this will make them disappear for gridstackjs
+}
+\examples{
+\dontrun{
+grid_stack_item(
+h = 2, w = 2, style = "overflow:hidden",
+box(
+  title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100\%",
+  div("Drag and scale the Boxes as desired")
+)
+)
+}
+
 }
