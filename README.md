@@ -169,9 +169,6 @@ grid_stack_item(
  echarts4rOutput(outputId =  "plot", height = "100%")
 )
 ```
-<<<<<<< HEAD
-=======
-
 ## Loading predefined Layouts
 
 It is also possible to load predefined Layouts. This is demonstrated in the healthdown example above.
@@ -196,4 +193,3 @@ new_layout <- '[
   ]'
 js$load_grid_layout(new_layout)
 ```
->>>>>>> d7bee9826c67368ddf608bcdd41aa8ac1f24d58a
