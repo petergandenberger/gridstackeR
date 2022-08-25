@@ -1,5 +1,6 @@
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs. 
+There were no ERRORs or WARNINGs.
+There were 2 NOTEs about possibly misspelled words in DESCRIPTION. 
 
 ## 0.1.0 Resubmission
 
