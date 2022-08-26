@@ -1,7 +1,7 @@
 Package: gridstackeR
 Type: Package
 Title: Wrapper for 'gridstack.js'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Peter", "Gandenberger", email = "peter.gandenberger@gmail.com", role = "cre"),
     person("Andreas", "Hofheinz", email = "andreas.hofheinz@outlook.com", role = "aut"),
