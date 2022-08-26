@@ -54,3 +54,21 @@ test_that("test_save_grid_layout_nested", {
   app$click("save_grid_layout_nested")
   app$expect_values(output = c("result_nested"))
 })
+
+
+test_that("test_remove_all_grid_elements", {
+  app <- AppDriver$new(name = "test_remove_all_grid_elements",
+                       expect_values_screenshot_args = FALSE)
+  app$click("remove_all_grid_elements")
+  app$click("save_grid_layout")
+  app$expect_values(output = c("result"))
+})
+
+
+test_that("test_remove_grid_element", {
+  app <- AppDriver$new(name = "test_remove_grid_element",
+                       expect_values_screenshot_args = FALSE)
+  app$click("remove_grid_element")
+  app$click("save_grid_layout")
+  app$expect_values(output = c("result"))
+})

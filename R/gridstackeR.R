@@ -127,6 +127,8 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
     shinyjs::extendShinyjs(functions = c("load_grid_layout"), text = js_load_grid_layout()),
     shinyjs::extendShinyjs(functions = c("save_grid_layout"), text = js_save_grid_layout()),
     shinyjs::extendShinyjs(functions = c("add_grid_element"), text = js_add_grid_element()),
+    shinyjs::extendShinyjs(functions = c("remove_grid_element"), text = js_remove_grid_element()),
+    shinyjs::extendShinyjs(functions = c("remove_all_grid_elements"), text = js_remove_all_grid_elements()),
     shinyjs::extendShinyjs(functions = c("load_grid"), text = js_load_grid()),
     shinyjs::extendShinyjs(functions = c("remove_grid"), text = js_remove_grid())
   )

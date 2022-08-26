@@ -160,6 +160,33 @@ function add_grid_element(grid_id, element) {
 /**
  * add elements
 **/
+function remove_grid_element(grid_id, element_id) {
+  var grid = helper_find_grid_by_id(grid_id);
+  var el = $('[gs-id="' + element_id + '"]')
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+  } else if(el == null | el.length != 1) {
+    console.log("Couldn't find element with id " + element_id);
+  } else {
+    grid.removeWidget(el[0]);
+  }
+}
+
+/**
+ * add elements
+**/
+function remove_all_grid_elements(grid_id, element) {
+  var grid = helper_find_grid_by_id(grid_id);
+  if(grid == null) {
+    console.log("Couldn't find grid with id " + grid_id);
+  } else {
+    grid.removeAll();
+  }
+}
+
+/**
+ * remove grid
+**/
 function remove_grid(grid_id) {
   var grid = helper_find_grid_by_id(grid_id);
   if(grid == null) {

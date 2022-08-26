@@ -58,6 +58,35 @@ js_add_grid_element <- function () {
   }"
 }
 
+js_remove_grid_element <- function () {
+  "shinyjs.remove_grid_element = function(params){
+    var defaultParams = {
+      grid_id : null,
+      element_id : null
+    };
+    params = shinyjs.getParams(params, defaultParams);
+    if(params.grid_id == null | params.element_id == null) {
+      console.log('function remove_grid_element needs a grid_id and a element');
+    } else {
+      remove_grid_element(params.grid_id, params.element_id);
+    }
+  }"
+}
+
+js_remove_all_grid_elements <- function () {
+  "shinyjs.remove_all_grid_elements = function(params){
+    var defaultParams = {
+      grid_id : null
+    };
+    params = shinyjs.getParams(params, defaultParams);
+    if(params.grid_id == null) {
+      console.log('function remove_all_grid_elements needs a grid_id');
+    } else {
+      remove_all_grid_elements(params.grid_id, params.element);
+    }
+  }"
+}
+
 js_remove_grid <- function () {
   "shinyjs.remove_grid = function(params){
     var defaultParams = {

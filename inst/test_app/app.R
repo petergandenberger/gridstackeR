@@ -16,6 +16,8 @@ ui <- dashboardPage(
            actionButton("save_grid_layout", "Save Layout"),
            actionButton("save_grid_layout_ns", "Save Layout (ns)"),
            actionButton("add_grid_element", "Add Element"),
+           actionButton("remove_grid_element", "Remove Element"),
+           actionButton("remove_all_grid_elements", "Remove all Elements"),
            actionButton("load_grid_layout", "Load Layout"),
            actionButton("add_grid", "Add Grid"),
            actionButton("add_grid_element_nested", "Add Element to nested grid"),
@@ -85,6 +87,17 @@ server <- function(input, output, session) {
       )
     )
   })
+
+  # remove element ###########################################################
+  observeEvent(input$remove_grid_element, {
+    shinyjs::js$remove_grid_element(grid_id = "grid_stack_1", element_id = "box1")
+  })
+
+  # remove all elements ###########################################################
+  observeEvent(input$remove_all_grid_elements, {
+    shinyjs::js$remove_all_grid_elements(grid_id = "grid_stack_1")
+  })
+
 
   # load_grid_layout ###########################################################
   observeEvent(input$load_grid_layout, {
