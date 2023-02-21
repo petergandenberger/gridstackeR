@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gridstackR
-The gridstackR package allows users to easily create Dashboards with [gridstack.js](https://gridstackjs.com/) functionalities 
+# gridstackeR
+The gridstackeR package allows users to easily create Dashboards with [gridstack.js](https://gridstackjs.com/) functionalities 
 
 'gridstack.js is [...] designed to help developers create beautiful draggable, resizable, responsive [...] layouts with just a few lines of code'
 
@@ -32,7 +32,7 @@ devtools::install_github("petergandenberger/gridstackeR")
 
 ## Example
 
-In the example below we add gridstackR to the basic shiny application 'Old Faithful Geyser'.
+In the example below we add gridstackeR to the basic shiny application 'Old Faithful Geyser'.
 The plot can now be dynamically resized and the position for both, the plot and the slider, can be changed using simple drag&drop.
 
 ```{r, eval=FALSE}
