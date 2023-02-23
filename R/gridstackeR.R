@@ -52,7 +52,7 @@
 #'         )
 #'       ),
 #'       grid_stack_item(
-#'         h = 3, w = 4, minH = 3, maxH = 3, id = "slider", style = "overflow:hidden",
+#'         h = 3, w = 4, min_h = 3, max_h = 3, id = "slider", style = "overflow:hidden",
 #'         box(
 #'           title = "Inputs", status = "warning", solidHeader = TRUE,
 #'           width = 12, height = "100%",
@@ -144,18 +144,18 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
 #'
 #' @param ... content to include in the grid stack item
 #' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels
-#' @param autoPosition if set to TRUE x and y attributes are ignored and the element is placed to the first
+#' @param auto_position if set to TRUE x and y attributes are ignored and the element is placed to the first
 #' available position. Having either x or y missing will also do that
 #' @param x,y element position in columns/rows.
-#' Note: if one is missing this will \code{autoPosition} the item
+#' Note: if one is missing this will \code{auto_position} the item
 #' @param w,h element size in columns/rows
-#' @param maxW,minW,maxH,minH element constraints in column/row (default none)
+#' @param max_w,min_w,max_h,min_h element constraints in column/row (default none)
 #' @param locked means another widget wouldn't be able to move it during dragging or resizing.
 #' The widget can still be dragged or resized by the user.
-#' You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.
-#' @param noResize if set to TRUE it disables element resizing
-#' @param noMove if set to TRUE it disables element moving
-#' @param resizeHandles - widgets can have their own custom resize handles.
+#' You need to add \code{no_resize} and \code{no_move} attributes to completely lock the widget.
+#' @param no_resize if set to TRUE it disables element resizing
+#' @param no_move if set to TRUE it disables element moving
+#' @param resize_handles - widgets can have their own custom resize handles.
 #' For example 'e,w' will make that particular widget only resize east and west.
 #'
 #' @return a grid_stack_item to be placed inside a \code{grid_stack}. This item is resizable and draggable by default.
@@ -171,40 +171,36 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
 #' )
 #' }
 #'
-
-
-
-
 #' @importFrom shiny div
 #' @export
 #'
-grid_stack_item <- function(..., id = NULL, autoPosition = NULL,
+grid_stack_item <- function(..., id = NULL, auto_position = NULL,
                             x = NULL, y = NULL, w = NULL, h = NULL,
-                            maxW = NULL, minW = NULL, maxH = NULL, minH = NULL,
-                            locked = NULL, noResize = NULL, noMove = NULL, resizeHandles = NULL) {
+                            max_w = NULL, min_w = NULL, max_h = NULL, min_h = NULL,
+                            locked = NULL, no_resize = NULL, no_move = NULL, resize_handles = NULL) {
 
   assert_string(id, null.ok = TRUE)
-  assert_string(resizeHandles, null.ok = TRUE)
-  sapply(c(autoPosition, locked, noResize, noMove), assert_logical, null.ok = TRUE)
-  sapply(c(x, y, w, h, maxH, maxW, minH, minW), assert_integerish, any.missing = FALSE, len = 1, null.ok = TRUE)
-  if (!(is.null(maxH) & is.null(minH))) assert_true(maxH >= minH)
-  if (!(is.null(maxW) & is.null(minW))) assert_true(maxW >= minW)
+  assert_string(resize_handles, null.ok = TRUE)
+  sapply(c(auto_position, locked, no_resize, no_move), assert_logical, null.ok = TRUE)
+  sapply(c(x, y, w, h, max_h, max_w, min_h, min_w), assert_integerish, any.missing = FALSE, len = 1, null.ok = TRUE)
+  if (!(is.null(max_h) & is.null(min_h))) assert_true(max_h >= min_h)
+  if (!(is.null(max_w) & is.null(min_w))) assert_true(max_w >= min_w)
 
   arg_list <- lapply(
     list(
-      "id" = id, "resizeHandles" = resizeHandles, "autoPosition" = autoPosition, "locked" = locked,
-      "noResize" = noResize, "noMove" = noMove, "x" = x, "y" = y, "w" = w, "h" = h, "maxH" = maxH, "maxW" = maxW,
-      "minH" = minH, "minW" = minW
+      "id" = id, "resize_handles" = resize_handles, "auto_position" = auto_position, "locked" = locked,
+      "no_resize" = no_resize, "no_move" = no_move, "x" = x, "y" = y, "w" = w, "h" = h, "max_h" = max_h, "max_w" = max_w,
+      "min_h" = min_h, "min_w" = min_w
     ),
     function(x) ifelse(is.null(x), '', as.character(x))
   )
 
   div(
     class = "grid-stack-item", 'gs-id' = arg_list$id,
-    'gs-auto-position' = arg_list$autoPosition, 'gs-w' = arg_list$w, 'gs-h' = arg_list$h, 'gs-x' = arg_list$x,
-    'gs-y' = arg_list$y, 'gs-max-w' = arg_list$maxW, 'gs-min-w' = arg_list$minW, 'gs-max-h' = arg_list$maxH,
-    'gs-min-h' = arg_list$minH, 'gs-locked' = arg_list$locked, 'gs-no-resize' = arg_list$noResize,
-    'gs-no-move' = arg_list$noMove, 'gs-resize-handles' = arg_list$resizeHandles,
+    'gs-auto-position' = arg_list$auto_position, 'gs-w' = arg_list$w, 'gs-h' = arg_list$h, 'gs-x' = arg_list$x,
+    'gs-y' = arg_list$y, 'gs-max-w' = arg_list$max_w, 'gs-min-w' = arg_list$min_w, 'gs-max-h' = arg_list$max_h,
+    'gs-min-h' = arg_list$min_h, 'gs-locked' = arg_list$locked, 'gs-no-resize' = arg_list$no_resize,
+    'gs-no-move' = arg_list$no_move, 'gs-resize-handles' = arg_list$resize_handles,
     div(
       class = "grid-stack-item-content",
       id = id,

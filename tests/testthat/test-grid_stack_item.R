@@ -13,8 +13,8 @@ test_that("grid_stack_item works", {
   item_actual_advanced <- paste0(
     grid_stack_item(shiny::div("item_content"), id = "item_id",
      x = 1, y = 2, w = 3, h = 4,
-     maxW = 5, minW = 1, maxH = 5, minH = 1,
-     locked = TRUE, noResize = TRUE, noMove = TRUE, resizeHandles = 'e,w')
+     max_w = 5, min_w = 1, max_h = 5, min_h = 1,
+     locked = TRUE, no_resize = TRUE, no_move = TRUE, resize_handles = 'e,w')
   )
 
   item_expected_advanced <-
