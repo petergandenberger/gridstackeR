@@ -36,7 +36,7 @@
 #'     grid_stack(
 #'       dynamic_full_window_height = TRUE,
 #'       grid_stack_item(
-#'         h = 2, w = 2, style = "overflow:hidden",
+#'         h = 2, w = 2,
 #'         box(
 #'           title = "gridstackeR", status = "success", solidHeader = TRUE,
 #'           width = 12, height = "100%",
@@ -44,7 +44,7 @@
 #'         )
 #'       ),
 #'       grid_stack_item(
-#'         h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+#'         h = 4, w = 4, id = "plot_container",
 #'         box(
 #'           title = "Histogram", status = "primary", solidHeader = TRUE,
 #'           width = 12, height = "100%",
@@ -52,7 +52,7 @@
 #'         )
 #'       ),
 #'       grid_stack_item(
-#'         h = 3, w = 4, min_h = 3, max_h = 3, id = "slider", style = "overflow:hidden",
+#'         h = 3, w = 4, min_h = 3, max_h = 3, id = "slider",
 #'         box(
 #'           title = "Inputs", status = "warning", solidHeader = TRUE,
 #'           width = 12, height = "100%",
@@ -163,7 +163,7 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
 #' @examples
 #' \dontrun{
 #' grid_stack_item(
-#' h = 2, w = 2, style = "overflow:hidden",
+#' h = 2, w = 2,
 #' box(
 #'   title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
 #'   div("Drag and scale the Boxes as desired")
@@ -177,7 +177,8 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
 grid_stack_item <- function(..., id = NULL, auto_position = NULL,
                             x = NULL, y = NULL, w = NULL, h = NULL,
                             max_w = NULL, min_w = NULL, max_h = NULL, min_h = NULL,
-                            locked = NULL, no_resize = NULL, no_move = NULL, resize_handles = NULL) {
+                            locked = NULL, no_resize = NULL, no_move = NULL,
+                            resize_handles = NULL, hide_overflow = TRUE) {
 
   assert_string(id, null.ok = TRUE)
   assert_string(resize_handles, null.ok = TRUE)
@@ -204,6 +205,7 @@ grid_stack_item <- function(..., id = NULL, auto_position = NULL,
     div(
       class = "grid-stack-item-content",
       id = id,
+      style = if(hide_overflow) "overflow:hidden;" else "",
       ...
     )
   )

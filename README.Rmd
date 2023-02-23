@@ -41,14 +41,14 @@ library(gridstackeR)
 ui <- fluidPage(
   grid_stack(
     grid_stack_item(
-      h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+      h = 4, w = 4, id = "plot_container",
       shinydashboard::box(
         title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
         plotOutput("plot", height = "auto")
       )
     ),
     grid_stack_item(
-      h = 3, w = 4, min_h = 3, max_h = 3, id = "slider", style = "overflow:hidden",
+      h = 3, w = 4, min_h = 3, max_h = 3, id = "slider",
       shinydashboard::box(
         title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
         sliderInput("slider", "Slider input:", 1, 100, 50)
@@ -89,7 +89,7 @@ The ```ui.R``` file might contain something like the following.
 ```{r, eval=FALSE}
 grid_stack(
   grid_stack_item(
-    h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+    h = 4, w = 4, id = "plot_container",
     shinydashboard::box(
       title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
       plotOutput("plot", height = "auto")

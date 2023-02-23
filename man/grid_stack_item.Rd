@@ -19,7 +19,8 @@ grid_stack_item(
   locked = NULL,
   no_resize = NULL,
   no_move = NULL,
-  resize_handles = NULL
+  resize_handles = NULL,
+  hide_overflow = TRUE
 )
 }
 \arguments{
@@ -61,7 +62,7 @@ The default for all parameters is an empty string, this will make them disappear
 \examples{
 \dontrun{
 grid_stack_item(
-h = 2, w = 2, style = "overflow:hidden",
+h = 2, w = 2,
 box(
   title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100\%",
   div("Drag and scale the Boxes as desired")

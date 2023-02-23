@@ -33,14 +33,14 @@ ui <- dashboardPage(
              id = "grid_stack_1",
              dynamic_full_window_height = TRUE,
              grid_stack_item(
-               h = 2, w = 2, style = "overflow:hidden", id = "box1",
+               h = 2, w = 2, id = "box1",
                box(
                  title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
                  div("Box1")
                )
              ),
              grid_stack_item(
-               x = 2, y = 0, h = 2, w = 2, style = "overflow:hidden", id = "box2",
+               x = 2, y = 0, h = 2, w = 2, id = "box2",
                box(
                  title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
                  div("Box2")

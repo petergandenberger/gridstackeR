@@ -18,21 +18,21 @@ ui <- dashboardPage(
       id = "grid_stack_1",
       dynamic_full_window_height = TRUE,
       grid_stack_item(
-        h = 2, w = 2, style = "overflow:hidden",
+        h = 2, w = 2,
         box(
           title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
           div("Drag and scale the Boxes as desired")
         )
       ),
       grid_stack_item(
-        h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+        h = 4, w = 4, id = "plot_container",
         box(
           title = "Histogram", status = "primary", solidHeader = TRUE, width = 12, height = "100%",
           plotOutput("plot", height = "auto")
         )
       ),
       grid_stack_item(
-        h = 3, w = 4, min_h = 3, max_h = 3, id = "slider", style = "overflow:hidden",
+        h = 3, w = 4, min_h = 3, max_h = 3, id = "slider",
         box(
           title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
           sliderInput("slider", "Slider input:", 1, 100, 50)
@@ -43,7 +43,7 @@ ui <- dashboardPage(
       id = "grid_stack_2",
       dynamic_full_window_height = TRUE,
       grid_stack_item(
-        h = 2, w = 2, style = "overflow:hidden",
+        h = 2, w = 2,
         box(
           title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100%",
           div("Drag and scale the Boxes as desired")
