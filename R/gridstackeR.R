@@ -103,7 +103,7 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
   assert_flag(dynamic_full_window_height)
   assert_numeric(height_offset, len = 1, any.missing = FALSE)
   assert_string(id)
-  shiny::addResourcePath("utils", system.file("assets", package = "gridstackeR"))
+  shiny::addResourcePath("gridstackeR_utils", system.file("assets", package = "gridstackeR"))
 
   htmltools::tagList(
     htmltools::htmlDependency(
@@ -125,7 +125,7 @@ grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", 
     ),
 
     shinyjs::useShinyjs(),
-    shinyjs::extendShinyjs(script = file.path("utils", "gridstackeR_utils.js"),
+    shinyjs::extendShinyjs(script = file.path("gridstackeR_utils", "gridstackeR_utils.js"),
                            functions = c("load_grid_layout", "save_grid_layout",
                                          "add_grid_element", "remove_grid_element",
                                          "remove_all_grid_elements", "load_grid",
