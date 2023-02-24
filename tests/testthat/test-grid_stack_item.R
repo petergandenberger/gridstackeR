@@ -6,7 +6,7 @@ test_that("grid_stack_item works", {
     paste0("<div class=\"grid-stack-item\" gs-id=\"\" gs-auto-position=\"\" gs-w=\"\" ",
            "gs-h=\"\" gs-x=\"\" gs-y=\"\" gs-max-w=\"\" gs-min-w=\"\" gs-max-h=\"\" ",
            "gs-min-h=\"\" gs-locked=\"\" gs-no-resize=\"\" gs-no-move=\"\" ",
-           "gs-resize-handles=\"\">\n  <div class=\"grid-stack-item-content\"></div>\n</div>")
+           "gs-resize-handles=\"\">\n  <div class=\"grid-stack-item-content\" style=\"overflow:hidden;\"></div>\n</div>")
   expect_equal(item_actual_simple, item_expected_simple)
 
 
@@ -22,7 +22,7 @@ test_that("grid_stack_item works", {
            "gs-w=\"3\" gs-h=\"4\" gs-x=\"1\" gs-y=\"2\" gs-max-w=\"5\" gs-min-w=\"1\" ",
            "gs-max-h=\"5\" gs-min-h=\"1\" gs-locked=\"TRUE\" gs-no-resize=\"TRUE\" ",
            "gs-no-move=\"TRUE\" gs-resize-handles=\"e,w\">\n  ",
-           "<div class=\"grid-stack-item-content\" id=\"item_id\">\n    ",
+           "<div class=\"grid-stack-item-content\" id=\"item_id\" style=\"overflow:hidden;\">\n    ",
            "<div>item_content</div>\n  </div>\n</div>")
 
   expect_equal(item_actual_advanced, item_expected_advanced)
