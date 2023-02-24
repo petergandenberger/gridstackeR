@@ -14,13 +14,6 @@ code’
 
 ## Installation
 
-You can install the released version of gridstackeR from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("gridstackeR")
-```
-
 You can install the development version from
 [GitHub](https://github.com/) with:
 
@@ -43,17 +36,11 @@ ui <- fluidPage(
   grid_stack(
     grid_stack_item(
       h = 4, w = 4, id = "plot_container",
-      shinydashboard::box(
-        title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-        plotOutput("plot", height = "auto")
-      )
+      plotOutput("plot", height = "auto")
     ),
     grid_stack_item(
-      h = 3, w = 4, min_h = 3, max_h = 3, id = "slider",
-      shinydashboard::box(
-        title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
-        sliderInput("slider", "Slider input:", 1, 100, 50)
-      )
+      h = 2, w = 3, no_resize = TRUE, id = "slider",
+      sliderInput("slider", "Slider input:", 1, 100, 50)
     )
   )
 )
@@ -72,7 +59,7 @@ server <- function(input, output) {
   # set the height according to the container height (minus the margins)
   height = function() {
     min_height <- 150
-    margin <- 80
+    margin <- 20
     max(input$plot_container_height - margin, min_height)
   })
 }
@@ -96,10 +83,7 @@ The `ui.R` file might contain something like the following.
 grid_stack(
   grid_stack_item(
     h = 4, w = 4, id = "plot_container",
-    shinydashboard::box(
-      title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-      plotOutput("plot", height = "auto")
-    )
+    plotOutput("plot", height = "auto")
   )
 )
 ```
@@ -131,7 +115,7 @@ output$plot <- renderPlot({
   # set the height according to the container height (minus the margins)
   height = function() {
     min_height <- 150
-    margin <- 80
+    margin <- 20
     max(input$plot_container_height - margin, min_height)
   }
 )
@@ -175,28 +159,4 @@ grid_stack_item(
  w = 5, h = 5, x = 7, y = 0, id = "c_plot",
  echarts4rOutput(outputId =  "plot", height = "100%")
 )
-```
-## Loading predefined Layouts
-
-It is also possible to load predefined Layouts. This is demonstrated in the healthdown example above.
-
-ui.R
-
-- every element has to have a unique id
-- initialize shinyJS with 'useShinyjs()'
-
-server.R
-
-- call the function js$load_grid_stack_layout(layout) with the desired 'layout' as a json-array string
-- each element of this json-array needs
-  - the 'id' of the grid_stack_item
-  - the desired new options of this item
-  
-``` r
-# do this inside of e.g. an 'observeEvent' of an 'actionButton'
-new_layout <- '[
-    {"id": "c_plot", "options":{"x": 0,"y": 0,"w": 2, "h": 10}},
-    {"id": "c_map", "options":{"x": 2,"y": 0,"w": 5, "h": 5}}
-  ]'
-js$load_grid_layout(new_layout)
 ```
