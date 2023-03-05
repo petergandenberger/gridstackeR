@@ -3,7 +3,7 @@
 #' @description
 #' This acts as a container for the \link{grid_stack_item}'s.
 #'
-#' @param ... content to include in the container
+#' @param ... all \code{grid_stack_item}s contained in this grid. No arguments other than \code{grid_stack_item}s are allowed here.
 #' @param id the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)
 #' @param opts grid options: check
 #' \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
@@ -106,6 +106,11 @@ grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrow
   assert_flag(dynamic_full_window_height)
   assert_numeric(height_offset, len = 1, any.missing = FALSE)
   assert_string(id)
+
+  if(!check_grid_stack_item_list(...)) {
+    stop("Arguments passed in the ... must be grid_stack_items")
+  }
+
   shiny::addResourcePath("gridstackeR_utils", system.file("assets", package = "gridstackeR"))
 
   htmltools::tagList(

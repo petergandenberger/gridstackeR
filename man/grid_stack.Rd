@@ -15,7 +15,7 @@ grid_stack(
 )
 }
 \arguments{
-\item{...}{content to include in the container}
+\item{...}{all \code{grid_stack_item}s contained in this grid. No arguments other than \code{grid_stack_item}s are allowed here.}
 
 \item{id}{the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)}
 
