@@ -26,7 +26,8 @@ grid_stack_item(
 \arguments{
 \item{...}{content to include in the grid stack item}
 
-\item{id}{the id of the item, used for save and load functions, this param is propagated through to lower levels}
+\item{id}{the id of the item, used for save and load functions, this param is propagated through to lower levels.
+If the id is provided, changes made to the item by the user will trigger reactive inputs for width, height, x, y (see Documentation for more information)}
 
 \item{auto_position}{if set to TRUE x and y attributes are ignored and the element is placed to the first
 available position. Having either x or y missing will also do that}

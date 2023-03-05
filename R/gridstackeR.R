@@ -146,7 +146,8 @@ grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrow
 #' The default for all parameters is an empty string, this will make them disappear for gridstackjs
 #'
 #' @param ... content to include in the grid stack item
-#' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels
+#' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels.
+#' If the id is provided, changes made to the item by the user will trigger reactive inputs for width, height, x, y (see Documentation for more information)
 #' @param auto_position if set to TRUE x and y attributes are ignored and the element is placed to the first
 #' available position. Having either x or y missing will also do that
 #' @param x,y element position in columns/rows.
