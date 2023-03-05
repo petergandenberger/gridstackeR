@@ -7,19 +7,20 @@
 grid_stack_item(
   ...,
   id = NULL,
-  autoPosition = NULL,
+  auto_position = NULL,
   x = NULL,
   y = NULL,
   w = NULL,
   h = NULL,
-  maxW = NULL,
-  minW = NULL,
-  maxH = NULL,
-  minH = NULL,
+  max_w = NULL,
+  min_w = NULL,
+  max_h = NULL,
+  min_h = NULL,
   locked = NULL,
-  noResize = NULL,
-  noMove = NULL,
-  resizeHandles = NULL
+  no_resize = NULL,
+  no_move = NULL,
+  resize_handles = NULL,
+  hide_overflow = TRUE
 )
 }
 \arguments{
@@ -27,25 +28,27 @@ grid_stack_item(
 
 \item{id}{the id of the item, used for save and load functions, this param is propagated through to lower levels}
 
-\item{autoPosition}{if set to TRUE x and y attributes are ignored and the element is placed to the first
+\item{auto_position}{if set to TRUE x and y attributes are ignored and the element is placed to the first
 available position. Having either x or y missing will also do that}
 
 \item{x, y}{element position in columns/rows.
-Note: if one is missing this will \code{autoPosition} the item}
+Note: if one is missing this will \code{auto_position} the item}
 
 \item{w, h}{element size in columns/rows}
 
-\item{maxW, minW, maxH, minH}{element constraints in column/row (default none)}
+\item{max_w, min_w, max_h, min_h}{element constraints in column/row (default none)}
 
 \item{locked}{means another widget wouldn't be able to move it during dragging or resizing.
 The widget can still be dragged or resized by the user.
-You need to add \code{noResize} and \code{noMove} attributes to completely lock the widget.}
+You need to add \code{no_resize} and \code{no_move} attributes to completely lock the widget.}
 
-\item{noResize}{if set to TRUE it disables element resizing}
+\item{no_resize}{if set to TRUE it disables element resizing}
 
-\item{noMove}{if set to TRUE it disables element moving}
+\item{no_move}{if set to TRUE it disables element moving}
 
-\item{resizeHandles}{- widgets can have their own custom resize handles.
+\item{resize_handles}{- widgets can have their own custom resize handles.}
+
+\item{hide_overflow}{hides the overflow of the item-content by default (i.e adds "overflow:hidden;" to the style)
 For example 'e,w' will make that particular widget only resize east and west.}
 }
 \value{
@@ -61,7 +64,7 @@ The default for all parameters is an empty string, this will make them disappear
 \examples{
 \dontrun{
 grid_stack_item(
-h = 2, w = 2, style = "overflow:hidden",
+h = 2, w = 2,
 box(
   title = "gridstackeR", status = "success", solidHeader = TRUE, width = 12, height = "100\%",
   div("Drag and scale the Boxes as desired")

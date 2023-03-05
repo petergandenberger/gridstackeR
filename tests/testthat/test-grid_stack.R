@@ -1,9 +1,10 @@
 library(gridstackeR)
 
 test_that("grid_stack works", {
+  set.seed('42')
   stack_actual_simple <- paste0(grid_stack())
-  stack_expected_simple <- '<div class="grid-stack" id="gridstackeR-grid"></div>
-<script>initGridstackeR({cellHeight: 70}, \'gridstackeR-grid\', 12, 12, false, 0);</script>'
+  stack_expected_simple <- '<div class="grid-stack" id="gridstackeR-grid2369"></div>
+<script>initGridstackeR({cellHeight: 70}, \'gridstackeR-grid2369\', 12, 12, false, 0);</script>'
   expect_equal(stack_actual_simple, stack_expected_simple)
 
 

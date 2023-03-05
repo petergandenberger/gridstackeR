@@ -41,18 +41,12 @@ library(gridstackeR)
 ui <- fluidPage(
   grid_stack(
     grid_stack_item(
-      h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
-      shinydashboard::box(
-        title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-        plotOutput("plot", height = "auto")
-      )
+      h = 4, w = 4, id = "plot_container",
+      plotOutput("plot", height = "auto")
     ),
     grid_stack_item(
-      h = 3, w = 4, minH = 3, maxH = 3, id = "slider", style = "overflow:hidden",
-      shinydashboard::box(
-        title = "Inputs", status = "warning", solidHeader = TRUE, width = 12, height = "100%",
-        sliderInput("slider", "Slider input:", 1, 100, 50)
-      )
+      h = 2, w = 3, no_resize = TRUE, id = "slider",
+      sliderInput("slider", "Slider input:", 1, 100, 50)
     )
   )
 )
@@ -71,7 +65,7 @@ server <- function(input, output) {
   # set the height according to the container height (minus the margins)
   height = function() {
     min_height <- 150
-    margin <- 80
+    margin <- 20
     max(input$plot_container_height - margin, min_height)
   })
 }
@@ -89,14 +83,22 @@ The ```ui.R``` file might contain something like the following.
 ```{r, eval=FALSE}
 grid_stack(
   grid_stack_item(
-    h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
-    shinydashboard::box(
-      title = "Histogram", status = "primary", solidHeader = TRUE,  width = 12, height = "100%",
-      plotOutput("plot", height = "auto")
-    )
+    h = 4, w = 4, id = "plot_container",
+    plotOutput("plot", height = "auto")
   )
 )
 ```
+
+## Reactive Inputs
+
+Every ```grid_stack_item``` has four reactive inputs that can be used to observe changes made to the element. 
+
+- ```<grid_stack_item-id>_width``` returns the width of the item
+- ```<grid_stack_item-id>_height``` returns the height of the item
+- ```<grid_stack_item-id>_x``` returns the x-position of the item in number of columns
+- ```<grid_stack_item-id>_y``` returns the y-position of the item in number of rows
+
+E.g. to observe the width of the grid_stack_item created in the section above use ```observe({print(input$plot_container_width)})```.
 
 ## Dynamic figure height
 
@@ -122,7 +124,7 @@ output$plot <- renderPlot({
   # set the height according to the container height (minus the margins)
   height = function() {
     min_height <- 150
-    margin <- 80
+    margin <- 20
     max(input$plot_container_height - margin, min_height)
   }
 )

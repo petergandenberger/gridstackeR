@@ -6,7 +6,7 @@
 \usage{
 grid_stack(
   ...,
-  id = "gridstackeR-grid",
+  id = "",
   opts = "{cellHeight: 70}",
   ncols = 12,
   nrows = 12,
@@ -17,7 +17,7 @@ grid_stack(
 \arguments{
 \item{...}{content to include in the container}
 
-\item{id}{the id of the grid_stack container}
+\item{id}{the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)}
 
 \item{opts}{grid options: check
 \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
@@ -56,7 +56,7 @@ ui <- dashboardPage(
     grid_stack(
       dynamic_full_window_height = TRUE,
       grid_stack_item(
-        h = 2, w = 2, style = "overflow:hidden",
+        h = 2, w = 2,
         box(
           title = "gridstackeR", status = "success", solidHeader = TRUE,
           width = 12, height = "100\%",
@@ -64,7 +64,7 @@ ui <- dashboardPage(
         )
       ),
       grid_stack_item(
-        h = 4, w = 4, id = "plot_container", style = "overflow:hidden",
+        h = 4, w = 4, id = "plot_container",
         box(
           title = "Histogram", status = "primary", solidHeader = TRUE,
           width = 12, height = "100\%",
@@ -72,7 +72,7 @@ ui <- dashboardPage(
         )
       ),
       grid_stack_item(
-        h = 3, w = 4, minH = 3, maxH = 3, id = "slider", style = "overflow:hidden",
+        h = 3, w = 4, min_h = 3, max_h = 3, id = "slider",
         box(
           title = "Inputs", status = "warning", solidHeader = TRUE,
           width = 12, height = "100\%",
