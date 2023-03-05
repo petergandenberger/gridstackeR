@@ -3,7 +3,7 @@
 #' @description
 #' This acts as a container for the \link{grid_stack_item}'s.
 #'
-#' @param ... content to include in the container
+#' @param ... all \code{grid_stack_item}s contained in this grid. No arguments other than \code{grid_stack_item}s are allowed here.
 #' @param id the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)
 #' @param opts grid options: check
 #' \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
@@ -106,6 +106,11 @@ grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrow
   assert_flag(dynamic_full_window_height)
   assert_numeric(height_offset, len = 1, any.missing = FALSE)
   assert_string(id)
+
+  if(!check_grid_stack_item_list(...)) {
+    stop("Arguments passed in the ... must be grid_stack_items")
+  }
+
   shiny::addResourcePath("gridstackeR_utils", system.file("assets", package = "gridstackeR"))
 
   htmltools::tagList(
@@ -146,7 +151,8 @@ grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrow
 #' The default for all parameters is an empty string, this will make them disappear for gridstackjs
 #'
 #' @param ... content to include in the grid stack item
-#' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels
+#' @param id the id of the item, used for save and load functions, this param is propagated through to lower levels.
+#' If the id is provided, changes made to the item by the user will trigger reactive inputs for width, height, x, y (see Documentation for more information)
 #' @param auto_position if set to TRUE x and y attributes are ignored and the element is placed to the first
 #' available position. Having either x or y missing will also do that
 #' @param x,y element position in columns/rows.
