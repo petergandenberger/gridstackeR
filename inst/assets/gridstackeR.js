@@ -32,6 +32,8 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
         if(id != null & el != null) {
           Shiny.onInputChange(id + '_height', el.offsetHeight);
           Shiny.onInputChange(id + '_width', el.offsetWidth);
+          Shiny.onInputChange(id + '_x', items[i].x);
+          Shiny.onInputChange(id + '_y', items[i].y);
         }
       }
     }, 500);

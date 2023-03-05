@@ -88,6 +88,21 @@ grid_stack(
 )
 ```
 
+## Reactive Inputs
+
+Every `grid_stack_item` has four reactive inputs that can be used to
+observe changes made to the element.
+
+- `<grid_stack_item-id>_width` returns the width of the item
+- `<grid_stack_item-id>_height` returns the height of the item
+- `<grid_stack_item-id>_x` returns the x-position of the item in number
+  of columns
+- `<grid_stack_item-id>_y` returns the y-position of the item in number
+  of rows
+
+E.g. to observe the width of the grid_stack_item created in the section
+above use `observe({print(input$plot_container_width)})`.
+
 ## Dynamic figure height
 
 Elements inside `grid-stack-item` might not change their height
