@@ -159,6 +159,7 @@ grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrow
 #' @param no_resize if set to TRUE it disables element resizing
 #' @param no_move if set to TRUE it disables element moving
 #' @param resize_handles - widgets can have their own custom resize handles.
+#' @param hide_overflow hides the overflow of the item-content by default (i.e adds "overflow:hidden;" to the style)
 #' For example 'e,w' will make that particular widget only resize east and west.
 #'
 #' @return a grid_stack_item to be placed inside a \code{grid_stack}. This item is resizable and draggable by default.

@@ -46,7 +46,9 @@ You need to add \code{no_resize} and \code{no_move} attributes to completely loc
 
 \item{no_move}{if set to TRUE it disables element moving}
 
-\item{resize_handles}{- widgets can have their own custom resize handles.
+\item{resize_handles}{- widgets can have their own custom resize handles.}
+
+\item{hide_overflow}{hides the overflow of the item-content by default (i.e adds "overflow:hidden;" to the style)
 For example 'e,w' will make that particular widget only resize east and west.}
 }
 \value{
