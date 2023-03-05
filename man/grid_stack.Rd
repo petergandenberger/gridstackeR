@@ -6,7 +6,7 @@
 \usage{
 grid_stack(
   ...,
-  id = "gridstackeR-grid",
+  id = "",
   opts = "{cellHeight: 70}",
   ncols = 12,
   nrows = 12,
@@ -17,7 +17,7 @@ grid_stack(
 \arguments{
 \item{...}{content to include in the container}
 
-\item{id}{the id of the grid_stack container}
+\item{id}{the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)}
 
 \item{opts}{grid options: check
 \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}

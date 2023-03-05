@@ -4,7 +4,7 @@
 #' This acts as a container for the \link{grid_stack_item}'s.
 #'
 #' @param ... content to include in the container
-#' @param id the id of the grid_stack container
+#' @param id the id of the grid_stack container used for multi-grid layouts. (if no id is provided, a random id is generated)
 #' @param opts grid options: check
 #' \href{https://github.com/gridstack/gridstack.js/tree/master/doc#grid-options}{ gridstack documentation}
 #' for more details
@@ -96,8 +96,11 @@
 #' }
 #'
 #' @export
-grid_stack <- function(..., id = "gridstackeR-grid", opts = "{cellHeight: 70}", ncols = 12,
-                       nrows = 12, dynamic_full_window_height = FALSE, height_offset = 0) {
+grid_stack <- function(..., id = '', opts = "{cellHeight: 70}", ncols = 12, nrows = 12,
+                       dynamic_full_window_height = FALSE, height_offset = 0) {
+  if(id == '') {
+    id <- paste0('gridstackeR-grid', sample(1:10000, 1))
+  }
   assert_integerish(ncols, lower = 0, len = 1, any.missing = FALSE)
   assert_integerish(nrows, lower = 0, len = 1, any.missing = FALSE)
   assert_flag(dynamic_full_window_height)
