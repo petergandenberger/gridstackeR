@@ -17,10 +17,7 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
   grid.on('resizestop', function(event, el) {
     $(window).trigger('resize');
     id = el.firstElementChild.getAttribute('id');
-    if(id != null) {
-      Shiny.onInputChange(id + '_height', el.offsetHeight);
-      Shiny.onInputChange(id + '_width', el.offsetWidth);
-    }
+    notify_shiny_inputs_changed(el, id);
   });
 
   grid.on('change', function(event, items) {
@@ -29,12 +26,7 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
       for(i in items) {
         id = items[i]["id"];
         el = document.getElementById(id);
-        if(id != null & el != null) {
-          Shiny.onInputChange(id + '_height', el.offsetHeight);
-          Shiny.onInputChange(id + '_width', el.offsetWidth);
-          Shiny.onInputChange(id + '_x', items[i].x);
-          Shiny.onInputChange(id + '_y', items[i].y);
-        }
+        notify_shiny_inputs_changed(el, id);
       }
     }, 500);
   });
@@ -61,12 +53,22 @@ function initGridstackeR(opts, id, ncols, nrows, dynamic_full_window_height, hei
 $(document).on('shiny:sessioninitialized', function(event) {
   $(".grid-stack-item").each(function() {
     id = this.firstElementChild.getAttribute('id');
-    if(id != null) {
-      Shiny.onInputChange(id + '_height', this.offsetHeight);
-      Shiny.onInputChange(id + '_width', this.offsetWidth);
-    }
+    notify_shiny_inputs_changed(this, id);
   });
 });
+
+function notify_shiny_inputs_changed (e, id) {
+  if(id != null & e != null) {
+    Shiny.onInputChange(id + '_height', e.offsetHeight);
+    Shiny.onInputChange(id + '_width', e.offsetWidth);
+    if(e.parentElement) {
+      Shiny.onInputChange(id + '_x', e.parentElement.getAttribute('gs-x'));
+      Shiny.onInputChange(id + '_y', e.parentElement.getAttribute('gs-y'));
+      Shiny.onInputChange(id + '_w', e.parentElement.getAttribute('gs-w'));
+      Shiny.onInputChange(id + '_h', e.parentElement.getAttribute('gs-h'));
+    }
+  }
+}
 
 /*
 * function for loading a specific layout.
