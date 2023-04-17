@@ -96,13 +96,13 @@ observe changes made to the element.
 - `<grid_stack_item-id>_width` returns the width of the item in pixels
 - `<grid_stack_item-id>_height` returns the height of the item in pixels
 - `<grid_stack_item-id>_w` returns the width of the item in number of
-  rows
-- `<grid_stack_item-id>_h` returns the height of the item in number of
   columns
+- `<grid_stack_item-id>_h` returns the height of the item in number of
+  rows
 - `<grid_stack_item-id>_x` returns the x-position of the item in number
-  of columns
+  of columns from the left
 - `<grid_stack_item-id>_y` returns the y-position of the item in number
-  of rows
+  of rows from the top
 
 E.g. to observe the width (in pixels) of the grid_stack_item created in
 the section above use `observe({print(input$plot_container_width)})`.
